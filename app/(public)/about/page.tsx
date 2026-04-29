@@ -14,24 +14,6 @@ export default function AboutPage() {
         }}
       />
 
-      {/* NAV */}
-      <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-8 py-6 sm:px-12">
-        <Link href="/" className="text-[11px] font-bold tracking-[0.28em] text-[#0A0A0A]">
-          PETSTORE
-        </Link>
-        <nav className="flex items-center gap-6 text-[12px] text-[#4A4945]">
-          <Link href="/about" className="text-[#0A0A0A] font-medium">About</Link>
-          <Link href="/contact" className="transition-colors hover:text-[#0A0A0A]">Contact</Link>
-          <Link href="/shop" className="transition-colors hover:text-[#0A0A0A]">Shop</Link>
-          <Link
-            href="/sign-in"
-            className="rounded-full border border-[#C8C6C0] px-5 py-2 text-[13px] transition-colors hover:border-[#0A0A0A] hover:text-[#0A0A0A]"
-          >
-            Sign in
-          </Link>
-        </nav>
-      </header>
-
       {/* HERO ROW */}
       <section className="relative z-10 mx-auto max-w-6xl px-8 pt-16 pb-12 sm:px-12">
         <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-[#8A8880]">

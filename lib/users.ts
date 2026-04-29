@@ -1,8 +1,7 @@
 import "server-only";
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
-import { randomUUID } from "node:crypto";
+import { connectToDatabase } from "./db";
+import { User } from "./models/User";
 
 export type UserRole = "user" | "admin";
 
@@ -22,54 +21,54 @@ export type CreateUserInput = {
   role?: UserRole;
 };
 
-const usersFilePath = path.join(process.cwd(), "data", "users.json");
-
-async function ensureUsersFile() {
-  await mkdir(path.dirname(usersFilePath), { recursive: true });
-
-  try {
-    await readFile(usersFilePath, "utf8");
-  } catch {
-    await writeFile(usersFilePath, "[]\n", "utf8");
-  }
-}
-
-async function readUsers(): Promise<UserRecord[]> {
-  await ensureUsersFile();
-
-  const fileContents = await readFile(usersFilePath, "utf8");
-
-  try {
-    const parsed = JSON.parse(fileContents) as unknown;
-    return Array.isArray(parsed) ? (parsed as UserRecord[]) : [];
-  } catch {
-    return [];
-  }
-}
-
-async function writeUsers(users: UserRecord[]) {
-  await ensureUsersFile();
-  await writeFile(usersFilePath, `${JSON.stringify(users, null, 2)}\n`, "utf8");
-}
-
 export async function findUserByEmail(email: string) {
-  const users = await readUsers();
-  return users.find((user) => user.email === email) ?? null;
+  await connectToDatabase();
+
+  const user = await User.findOne({ email: email.toLowerCase() });
+  if (!user) return null;
+
+  return {
+    id: user._id.toString(),
+    name: user.name,
+    email: user.email,
+    password: user.password,
+    role: user.role as UserRole,
+    createdAt: user.createdAt?.toISOString() ?? new Date().toISOString(),
+  } satisfies UserRecord;
+}
+
+export async function findUserById(id: string) {
+  await connectToDatabase();
+
+  const user = await User.findById(id);
+  if (!user) return null;
+
+  return {
+    id: user._id.toString(),
+    name: user.name,
+    email: user.email,
+    password: user.password,
+    role: user.role as UserRole,
+    createdAt: user.createdAt?.toISOString() ?? new Date().toISOString(),
+  } satisfies UserRecord;
 }
 
 export async function createUser(input: CreateUserInput) {
-  const users = await readUsers();
-  const user: UserRecord = {
-    id: randomUUID(),
+  await connectToDatabase();
+
+  const user = await User.create({
     name: input.name,
-    email: input.email,
+    email: input.email.toLowerCase(),
     password: input.password,
     role: input.role ?? "user",
-    createdAt: new Date().toISOString(),
-  };
+  });
 
-  users.push(user);
-  await writeUsers(users);
-
-  return user;
+  return {
+    id: user._id.toString(),
+    name: user.name,
+    email: user.email,
+    password: user.password,
+    role: user.role as UserRole,
+    createdAt: user.createdAt?.toISOString() ?? new Date().toISOString(),
+  } satisfies UserRecord;
 }

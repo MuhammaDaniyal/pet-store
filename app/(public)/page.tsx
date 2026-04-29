@@ -20,32 +20,6 @@ export default function HomePage() {
         }}
       />
 
-      {/* NAV */}
-      <header className="relative z-10 pt-5 pb-4 sm:pt-6 sm:pb-5">
-        <Container>
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold tracking-[0.28em] text-[#0A0A0A]">
-              PETSTORE
-            </span>
-
-            <nav className="flex items-center gap-3">
-              <Link
-                href="/sign-in"
-                className="rounded-full border border-[#C8C6C0] px-5 py-2 text-[13px] text-[#4A4945] hover:border-[#0A0A0A] hover:text-[#0A0A0A]"
-              >
-                Sign in
-              </Link>
-              <Link
-                href="/sign-up"
-                className="rounded-full bg-[#0A0A0A] px-5 py-2 text-[13px] font-medium text-[#F5F4F0] hover:bg-[#2A2A2A]"
-              >
-                Join now
-              </Link>
-            </nav>
-          </div>
-        </Container>
-      </header>
-
       {/* HERO */}
       <section className="relative z-10 py-20 text-center sm:py-28 lg:py-32">
         <Container>
