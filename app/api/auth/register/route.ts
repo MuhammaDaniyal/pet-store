@@ -54,7 +54,8 @@ export async function POST(request: Request) {
     fieldErrors.confirmPassword = "Passwords do not match.";
   }
 
-  if (!email.includes("@")) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
     fieldErrors.email = "Enter a valid email address.";
   }
 
