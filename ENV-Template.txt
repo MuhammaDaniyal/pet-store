@@ -1,1 +1,0 @@
-Add the variables to be added in .env.local
