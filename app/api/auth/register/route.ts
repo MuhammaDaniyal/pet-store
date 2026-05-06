@@ -1,5 +1,10 @@
-import { hashPassword, signToken } from "@/lib/auth";
-import { createUser, findUserByEmail } from "@/lib/users";
+import { hashPassword } from "@/lib/auth";
+import { sendVerificationEmail } from "@/lib/email";
+import {
+  createSignupVerification,
+  deleteSignupVerificationByEmail,
+} from "@/lib/signup-verifications";
+import { findUserByEmail } from "@/lib/users";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -9,6 +14,13 @@ type RegisterBody = {
   email?: string;
   password?: string;
   confirmPassword?: string;
+};
+
+type RegisterResponse = {
+  message: string;
+  email: string;
+  verificationCode?: string;
+  expiresInMinutes: number;
 };
 
 function createFieldError(message: string) {
@@ -80,33 +92,39 @@ export async function POST(request: Request) {
 
   const hashedPassword = await hashPassword(password);
 
-  const user = await createUser({
+  await deleteSignupVerificationByEmail(email);
+
+  const verification = await createSignupVerification({
     name,
     email,
     password: hashedPassword,
-    role: "user",
   });
 
-  const token = signToken({
-    userId: user.id,
-    email: user.email,
-    role: user.role,
-  });
+  try {
+    const sendResult = await sendVerificationEmail({
+      name,
+      email,
+      code: verification.code,
+    });
 
-  const response = NextResponse.json({
-    message: "Account created successfully.",
-    role: user.role,
-  });
+    const responseBody: RegisterResponse = {
+      message: "We sent a verification code to your email.",
+      email,
+      expiresInMinutes: verification.expiresInMinutes,
+      ...(sendResult.debugCode ? { verificationCode: sendResult.debugCode } : {}),
+    };
 
-  response.cookies.set({
-    name: "token",
-    value: token,
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 7,
-  });
+    return NextResponse.json(responseBody, { status: 201 });
+  } catch (error) {
+    await deleteSignupVerificationByEmail(email);
 
-  return response;
+    const message = error instanceof Error ? error.message : "Unable to send verification email.";
+    return NextResponse.json(
+      {
+        message,
+        fieldErrors: { form: message },
+      },
+      { status: 500 },
+    );
+  }
 }

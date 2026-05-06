@@ -15,6 +15,8 @@ type FieldErrors = {
 type RegisterResponse = {
   message?: string;
   fieldErrors?: FieldErrors;
+  email?: string;
+  verificationCode?: string;
 };
 
 export default function SignUpPage() {
@@ -73,7 +75,14 @@ export default function SignUpPage() {
         return;
       }
 
-      router.replace("/sign-in");
+      const verificationUrl = new URL("/sign-up/verify", window.location.origin);
+      verificationUrl.searchParams.set("email", data.email ?? email);
+
+      if (data.verificationCode && process.env.NODE_ENV !== "production") {
+        verificationUrl.searchParams.set("code", data.verificationCode);
+      }
+
+      router.replace(`${verificationUrl.pathname}${verificationUrl.search}`);
     } catch {
       setFieldErrors({ form: "Unable to create account. Please try again." });
     } finally {
