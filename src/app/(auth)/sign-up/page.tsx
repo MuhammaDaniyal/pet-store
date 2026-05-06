@@ -91,18 +91,18 @@ export default function SignUpPage() {
   }
 
   const inputClassName =
-    "w-full rounded-[6px] border border-[#D6D4CE] bg-[#EDECE8] px-4 py-3 text-[#0A0A0A] placeholder:text-[#8A8880] focus:border-[#0A0A0A] focus:outline-none";
+    "w-full rounded-sm border border-border bg-surface px-4 py-3 text-primary placeholder:text-muted focus:border-[#0A0A0A] focus:outline-none";
 
   return (
-    <section className="w-full max-w-md rounded-[16px] border border-[#D6D4CE] bg-[#EDECE8] p-10">
+    <section className="w-full max-w-md rounded-lg border border-border bg-surface p-10">
       <div className="space-y-2">
-        <h1 className="text-2xl font-medium text-[#0A0A0A]">Create an account</h1>
-        <p className="text-sm text-[#4A4945]">Join PetStore and find your perfect companion</p>
+        <h1 className="text-2xl font-medium text-primary">Create an account</h1>
+        <p className="text-sm text-secondary">Join PetStore and find your perfect companion</p>
       </div>
 
       <form className="mt-8 space-y-5" onSubmit={handleSubmit} noValidate>
         <div className="space-y-2">
-          <label htmlFor="name" className="text-sm font-medium text-[#0A0A0A]">
+          <label htmlFor="name" className="text-sm font-medium text-primary">
             Full name
           </label>
           <input
@@ -115,11 +115,11 @@ export default function SignUpPage() {
             className={inputClassName}
             placeholder="Alex Morgan"
           />
-          {fieldErrors.name ? <p className="text-xs text-[#C0392B]">{fieldErrors.name}</p> : null}
+          {fieldErrors.name ? <p className="text-xs text-error">{fieldErrors.name}</p> : null}
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="email" className="text-sm font-medium text-[#0A0A0A]">
+          <label htmlFor="email" className="text-sm font-medium text-primary">
             Email
           </label>
           <input
@@ -132,11 +132,11 @@ export default function SignUpPage() {
             className={inputClassName}
             placeholder="you@example.com"
           />
-          {fieldErrors.email ? <p className="text-xs text-[#C0392B]">{fieldErrors.email}</p> : null}
+          {fieldErrors.email ? <p className="text-xs text-error">{fieldErrors.email}</p> : null}
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="password" className="text-sm font-medium text-[#0A0A0A]">
+          <label htmlFor="password" className="text-sm font-medium text-primary">
             Password
           </label>
           <input
@@ -149,11 +149,11 @@ export default function SignUpPage() {
             className={inputClassName}
             placeholder="Create a password"
           />
-          {fieldErrors.password ? <p className="text-xs text-[#C0392B]">{fieldErrors.password}</p> : null}
+          {fieldErrors.password ? <p className="text-xs text-error">{fieldErrors.password}</p> : null}
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="confirmPassword" className="text-sm font-medium text-[#0A0A0A]">
+          <label htmlFor="confirmPassword" className="text-sm font-medium text-primary">
             Confirm password
           </label>
           <input
@@ -167,24 +167,24 @@ export default function SignUpPage() {
             placeholder="Repeat your password"
           />
           {fieldErrors.confirmPassword ? (
-            <p className="text-xs text-[#C0392B]">{fieldErrors.confirmPassword}</p>
+            <p className="text-xs text-error">{fieldErrors.confirmPassword}</p>
           ) : null}
         </div>
 
-        {fieldErrors.form ? <p className="text-sm text-[#C0392B]">{fieldErrors.form}</p> : null}
+        {fieldErrors.form ? <p className="text-sm text-error">{fieldErrors.form}</p> : null}
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded-[10px] bg-[#0A0A0A] py-3 text-sm font-medium text-[#F5F4F0] transition-colors hover:bg-[#1A1A1A] disabled:cursor-not-allowed disabled:opacity-70"
+          className="w-full rounded-md bg-accent py-3 text-sm font-medium text-[#F5F4F0] transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-70"
         >
           {isSubmitting ? "Creating account..." : "Create account"}
         </button>
       </form>
 
-      <p className="mt-6 text-sm text-[#8A8880]">
+      <p className="mt-6 text-sm text-muted">
         Already have an account?{" "}
-        <Link href="/sign-in" className="font-medium text-[#0A0A0A] underline-offset-4 hover:underline">
+        <Link href="/sign-in" className="font-medium text-primary underline-offset-4 hover:underline">
           Sign in
         </Link>
       </p>

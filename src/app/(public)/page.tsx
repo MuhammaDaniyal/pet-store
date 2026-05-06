@@ -8,7 +8,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export default function HomePage() {
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-[#F5F4F0] px-4 font-sans sm:px-6 lg:px-8">
+    <main className="relative isolate min-h-screen overflow-hidden bg-background px-4 font-sans sm:px-6 lg:px-8">
 
       {/* Grain */}
       <div
@@ -31,18 +31,18 @@ export default function HomePage() {
               PS
             </div>
 
-            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-[#8A8880] sm:mb-6">
+            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-muted sm:mb-6">
               Premium pet care — since 2024
             </p>
 
-            <h1 className="mx-auto max-w-3xl text-[clamp(3rem,7vw,5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-[#0A0A0A]">
+            <h1 className="mx-auto max-w-3xl text-[clamp(3rem,7vw,5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-primary">
               Every companion <br />
               <span className="text-[#6A6860] font-normal">deserves</span> the best.
             </h1>
 
             <div className="mx-auto my-8 h-px w-20 bg-[#D6D4CE]" />
 
-            <p className="mx-auto max-w-xl text-[15px] leading-relaxed text-[#4A4945] sm:text-base">
+            <p className="mx-auto max-w-xl text-[15px] leading-relaxed text-secondary sm:text-base">
               Thoughtful products, reliable delivery, and a focused experience
               for pet owners who care about quality.
             </p>
@@ -50,13 +50,13 @@ export default function HomePage() {
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <Link
                 href="/sign-up"
-                className="rounded-full bg-[#0A0A0A] px-7 py-3 text-[13px] font-medium text-[#F5F4F0] hover:bg-[#2A2A2A]"
+                className="rounded-full bg-accent px-7 py-3 text-[13px] font-medium text-[#F5F4F0] hover:bg-[#2A2A2A]"
               >
                 Create account
               </Link>
               <Link
                 href="/shop"
-                className="rounded-full border border-[#C8C6C0] px-7 py-3 text-[13px] font-medium text-[#0A0A0A] hover:border-[#0A0A0A]"
+                className="rounded-full border border-[#C8C6C0] px-7 py-3 text-[13px] font-medium text-primary hover:border-[#0A0A0A]"
               >
                 Browse shop
               </Link>
@@ -88,17 +88,17 @@ export default function HomePage() {
             ].map((card) => (
               <div
                 key={card.tag}
-                className="rounded-2xl border border-[#D6D4CE] bg-[#EDECE8] p-7 sm:p-8"
+                className="rounded-2xl border border-border bg-surface p-7 sm:p-8"
               >
-                <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#8A8880]">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted">
                   {card.tag}
                 </span>
 
-                <p className="mt-4 text-lg font-medium text-[#0A0A0A]">
+                <p className="mt-4 text-lg font-medium text-primary">
                   {card.title}
                 </p>
 
-                <p className="mt-2 text-sm leading-relaxed text-[#4A4945]">
+                <p className="mt-2 text-sm leading-relaxed text-secondary">
                   {card.body}
                 </p>
               </div>

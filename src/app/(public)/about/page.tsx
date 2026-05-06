@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <main className="relative min-h-screen bg-[#F5F4F0] font-sans">
+    <main className="relative min-h-screen bg-background font-sans">
 
       {/* Grain */}
       <div
@@ -16,12 +16,12 @@ export default function AboutPage() {
 
       {/* HERO ROW */}
       <section className="relative z-10 mx-auto max-w-6xl px-8 pt-16 pb-12 sm:px-12">
-        <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-[#8A8880]">
+        <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-muted">
           About us
         </p>
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <h1
-            className="max-w-xl text-[clamp(2.4rem,5vw,4.2rem)] font-semibold leading-[1.08] text-[#0A0A0A]"
+            className="max-w-xl text-[clamp(2.4rem,5vw,4.2rem)] font-semibold leading-[1.08] text-primary"
             style={{ letterSpacing: "-0.03em" }}
           >
             Built for people
@@ -29,7 +29,7 @@ export default function AboutPage() {
             who love their pets{" "}
             <em className="font-normal not-italic text-[#6A6860]">deeply.</em>
           </h1>
-          <p className="max-w-sm text-[14px] leading-[1.85] text-[#4A4945] lg:text-right">
+          <p className="max-w-sm text-[14px] leading-[1.85] text-secondary lg:text-right">
             PetStore started from a simple frustration — finding quality
             pet products online was a mess. So we fixed it.
           </p>
@@ -47,35 +47,35 @@ export default function AboutPage() {
 
           {/* Left — sticky label */}
           <div>
-            <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#8A8880]">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted">
               Our story
             </span>
-            <div className="mt-8 rounded-[20px] border border-[#D6D4CE] bg-[#EDECE8] p-7">
-              <p className="text-[2rem] font-semibold leading-tight text-[#0A0A0A]" style={{ letterSpacing: "-0.02em" }}>
+            <div className="mt-8 rounded-[20px] border border-border bg-surface p-7">
+              <p className="text-[2rem] font-semibold leading-tight text-primary" style={{ letterSpacing: "-0.02em" }}>
                 2024
               </p>
-              <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-[#8A8880]">
+              <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-muted">
                 Founded
               </p>
               <div className="my-5 h-px bg-[#D6D4CE]" />
-              <p className="text-[2rem] font-semibold leading-tight text-[#0A0A0A]" style={{ letterSpacing: "-0.02em" }}>
+              <p className="text-[2rem] font-semibold leading-tight text-primary" style={{ letterSpacing: "-0.02em" }}>
                 600+
               </p>
-              <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-[#8A8880]">
+              <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-muted">
                 Products
               </p>
               <div className="my-5 h-px bg-[#D6D4CE]" />
-              <p className="text-[2rem] font-semibold leading-tight text-[#0A0A0A]" style={{ letterSpacing: "-0.02em" }}>
+              <p className="text-[2rem] font-semibold leading-tight text-primary" style={{ letterSpacing: "-0.02em" }}>
                 5
               </p>
-              <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-[#8A8880]">
+              <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-muted">
                 Animal categories
               </p>
             </div>
           </div>
 
           {/* Right — text body */}
-          <div className="space-y-6 text-[15px] leading-[1.85] text-[#4A4945]">
+          <div className="space-y-6 text-[15px] leading-[1.85] text-secondary">
             <p>
               PetStore was founded by a group of pet owners who got tired of
               inconsistent quality, slow delivery, and stores that treated animals
@@ -101,9 +101,9 @@ export default function AboutPage() {
                 { label: "Real support", body: "Humans on the other end. No bots, no ticket queues." },
                 { label: "Transparency", body: "Honest pricing. Clear ingredients. Nothing hidden." },
               ].map((v) => (
-                <div key={v.label} className="rounded-[16px] border border-[#D6D4CE] bg-[#EDECE8] p-6">
-                  <p className="text-[13px] font-semibold text-[#0A0A0A]">{v.label}</p>
-                  <p className="mt-2 text-[13px] leading-[1.7] text-[#4A4945]">{v.body}</p>
+                <div key={v.label} className="rounded-lg border border-border bg-surface p-6">
+                  <p className="text-[13px] font-semibold text-primary">{v.label}</p>
+                  <p className="mt-2 text-[13px] leading-[1.7] text-secondary">{v.body}</p>
                 </div>
               ))}
             </div>
@@ -113,25 +113,25 @@ export default function AboutPage() {
 
       {/* CTA BAND */}
       <section className="relative z-10 mx-auto max-w-6xl px-8 pb-24 sm:px-12">
-        <div className="flex flex-col items-center justify-between gap-6 rounded-[20px] bg-[#0A0A0A] px-10 py-12 text-center sm:flex-row sm:text-left">
+        <div className="flex flex-col items-center justify-between gap-6 rounded-[20px] bg-accent px-10 py-12 text-center sm:flex-row sm:text-left">
           <div>
             <p className="text-[18px] font-medium text-[#F5F4F0]" style={{ letterSpacing: "-0.01em" }}>
               Ready to find the perfect products?
             </p>
-            <p className="mt-1 text-[13px] text-[#8A8880]">
+            <p className="mt-1 text-[13px] text-muted">
               Join thousands of pet owners who trust PetStore.
             </p>
           </div>
           <div className="flex gap-3">
             <Link
               href="/shop"
-              className="rounded-full border border-[#3A3A3A] px-6 py-3 text-[13px] font-medium text-[#8A8880] transition-colors hover:border-[#F5F4F0] hover:text-[#F5F4F0]"
+              className="rounded-full border border-[#3A3A3A] px-6 py-3 text-[13px] font-medium text-muted transition-colors hover:border-[#F5F4F0] hover:text-[#F5F4F0]"
             >
               Browse shop
             </Link>
             <Link
               href="/sign-up"
-              className="rounded-full bg-[#F5F4F0] px-6 py-3 text-[13px] font-medium text-[#0A0A0A] transition-colors hover:bg-[#EDECE8]"
+              className="rounded-full bg-background px-6 py-3 text-[13px] font-medium text-primary transition-colors hover:bg-surface"
             >
               Create account
             </Link>

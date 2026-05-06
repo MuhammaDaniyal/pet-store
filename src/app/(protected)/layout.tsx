@@ -18,7 +18,7 @@ export default async function ProtectedLayout({
   return (
     <>
       <PublicHeader />
-      <div className="min-h-screen bg-[#F5F4F0]">
+      <div className="min-h-screen bg-background">
         {children}
       </div>
       <Footer />

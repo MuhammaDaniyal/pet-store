@@ -18,10 +18,10 @@ export default function ContactPage() {
   };
 
   const inputClass =
-    "w-full rounded-[10px] border border-[#D6D4CE] bg-[#EDECE8] px-4 py-3 text-[14px] text-[#0A0A0A] placeholder:text-[#8A8880] focus:border-[#0A0A0A] focus:outline-none transition-colors";
+    "w-full rounded-md border border-border bg-surface px-4 py-3 text-[14px] text-primary placeholder:text-muted focus:border-[#0A0A0A] focus:outline-none transition-colors";
 
   return (
-    <main className="relative min-h-screen bg-[#F5F4F0] font-sans">
+    <main className="relative min-h-screen bg-background font-sans">
 
       {/* Grain */}
       <div
@@ -36,19 +36,19 @@ export default function ContactPage() {
 
       {/* HERO ROW */}
       <section className="relative z-10 mx-auto max-w-6xl px-8 pt-16 pb-12 sm:px-12">
-        <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-[#8A8880]">
+        <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-muted">
           Contact
         </p>
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <h1
-            className="max-w-lg text-[clamp(2.4rem,5vw,4.2rem)] font-semibold leading-[1.08] text-[#0A0A0A]"
+            className="max-w-lg text-[clamp(2.4rem,5vw,4.2rem)] font-semibold leading-[1.08] text-primary"
             style={{ letterSpacing: "-0.03em" }}
           >
             We&apos;re here.
             <br />
             <em className="font-normal not-italic text-[#6A6860]">Say something.</em>
           </h1>
-          <p className="max-w-xs text-[14px] leading-[1.85] text-[#4A4945] lg:text-right">
+          <p className="max-w-xs text-[14px] leading-[1.85] text-secondary lg:text-right">
             Questions, feedback, or partnership — we read every message and
             reply within one business day.
           </p>
@@ -66,7 +66,7 @@ export default function ContactPage() {
 
           {/* Left — info */}
           <div className="space-y-6">
-            <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#8A8880]">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted">
               Get in touch
             </span>
 
@@ -94,37 +94,37 @@ export default function ContactPage() {
             ].map((item) => (
               <div
                 key={item.label}
-                className="rounded-[16px] border border-[#D6D4CE] bg-[#EDECE8] p-6"
+                className="rounded-lg border border-border bg-surface p-6"
               >
-                <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#8A8880]">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted">
                   {item.label}
                 </p>
-                <p className="mt-2 text-[14px] font-medium text-[#0A0A0A]">
+                <p className="mt-2 text-[14px] font-medium text-primary">
                   {item.value}
                 </p>
-                <p className="mt-1 text-[12px] text-[#8A8880]">{item.sub}</p>
+                <p className="mt-1 text-[12px] text-muted">{item.sub}</p>
               </div>
             ))}
           </div>
 
           {/* Right — form */}
-          <div className="rounded-[20px] border border-[#D6D4CE] bg-[#EDECE8] p-8 sm:p-10">
+          <div className="rounded-[20px] border border-border bg-surface p-8 sm:p-10">
             {sent ? (
               <div className="flex h-full flex-col items-center justify-center py-16 text-center">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-[#0A0A0A]">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-accent">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M4 10l4.5 4.5L16 6" stroke="#F5F4F0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <p className="text-[18px] font-medium text-[#0A0A0A]" style={{ letterSpacing: "-0.01em" }}>
+                <p className="text-[18px] font-medium text-primary" style={{ letterSpacing: "-0.01em" }}>
                   Message sent.
                 </p>
-                <p className="mt-2 text-[13px] text-[#4A4945]">
+                <p className="mt-2 text-[13px] text-secondary">
                   We&apos;ll get back to you within one business day.
                 </p>
                 <button
                   onClick={() => { setSent(false); setForm({ name: "", email: "", subject: "", message: "" }); }}
-                  className="mt-8 rounded-full border border-[#C8C6C0] px-6 py-2.5 text-[13px] text-[#4A4945] transition-colors hover:border-[#0A0A0A] hover:text-[#0A0A0A]"
+                  className="mt-8 rounded-full border border-[#C8C6C0] px-6 py-2.5 text-[13px] text-secondary transition-colors hover:border-[#0A0A0A] hover:text-primary"
                 >
                   Send another
                 </button>
@@ -132,7 +132,7 @@ export default function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.2em] text-[#8A8880]">
+                  <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
                     Full name
                   </label>
                   <input
@@ -146,7 +146,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.2em] text-[#8A8880]">
+                  <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
                     Email
                   </label>
                   <input
@@ -160,7 +160,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.2em] text-[#8A8880]">
+                  <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
                     Subject
                   </label>
                   <select
@@ -179,7 +179,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.2em] text-[#8A8880]">
+                  <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
                     Message
                   </label>
                   <textarea
@@ -195,7 +195,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="mt-2 w-full rounded-full bg-[#0A0A0A] py-3.5 text-[13px] font-medium text-[#F5F4F0] transition-colors hover:bg-[#2A2A2A] disabled:opacity-50"
+                  className="mt-2 w-full rounded-full bg-accent py-3.5 text-[13px] font-medium text-[#F5F4F0] transition-colors hover:bg-[#2A2A2A] disabled:opacity-50"
                 >
                   {loading ? "Sending..." : "Send message"}
                 </button>

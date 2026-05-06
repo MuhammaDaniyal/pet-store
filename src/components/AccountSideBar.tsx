@@ -21,8 +21,8 @@ const AccountSideBar = () => {
                             key={link.href}
                             href={link.href}
                             className={`block px-4 py-2 rounded-md transition-colors ${isActive
-                                    ? "bg-[#0A0A0A] text-white font-medium"
-                                    : "text-[#4A4945] hover:bg-[#E8E6E0]"
+                                    ? "bg-accent text-white font-medium"
+                                    : "text-secondary hover:bg-[#E8E6E0]"
                                 }`}
                         >
                             {link.label}

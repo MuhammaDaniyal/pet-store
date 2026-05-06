@@ -6,10 +6,10 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="relative min-h-screen bg-[#F5F4F0] px-4 py-6 text-[#0A0A0A] sm:px-6 lg:px-8">
+    <main className="relative min-h-screen bg-background px-4 py-6 text-primary sm:px-6 lg:px-8">
       <Link
         href="/"
-        className="absolute left-4 top-4 text-sm font-medium tracking-[0.24em] text-[#0A0A0A] sm:left-6 sm:top-6"
+        className="absolute left-4 top-4 text-sm font-medium tracking-[0.24em] text-primary sm:left-6 sm:top-6"
       >
         PETSTORE
       </Link>
