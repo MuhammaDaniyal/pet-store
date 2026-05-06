@@ -32,7 +32,7 @@ export async function PublicHeader() {
               href="/account"
               className="rounded-full border border-[#C8C6C0] px-5 py-2 text-[13px] transition-colors hover:border-[#0A0A0A] hover:text-[#0A0A0A]"
             >
-              {user.email}
+              {user.name}
             </Link>
           </>
         ) : (

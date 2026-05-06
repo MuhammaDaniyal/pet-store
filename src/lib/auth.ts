@@ -5,6 +5,7 @@ import jwt, { type JwtPayload } from "jsonwebtoken";
 
 export type AuthTokenPayload = {
   userId: string;
+  name: string;
   email: string;
   role: "user" | "admin";
 };
@@ -43,6 +44,7 @@ export function verifyToken(token: string) {
 
     if (
       typeof payload.userId !== "string" ||
+      typeof payload.name !== "string" ||
       typeof payload.email !== "string" ||
       (payload.role !== "user" && payload.role !== "admin")
     ) {
@@ -52,6 +54,7 @@ export function verifyToken(token: string) {
     return {
       userId: payload.userId,
       email: payload.email,
+      name: payload.name,
       role: payload.role,
     } satisfies AuthTokenPayload;
   } catch {
