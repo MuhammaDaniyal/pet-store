@@ -106,23 +106,6 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
-
-      {/* FOOTER */}
-      <footer className="border-t border-[#D6D4CE] py-10 sm:py-12">
-        <Container>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <span className="text-[11px] tracking-[0.2em] text-[#8A8880]">
-              PETSTORE © 2024
-            </span>
-
-            <div className="flex gap-6 text-[12px] text-[#8A8880]">
-              <Link href="/about" className="hover:text-black">About</Link>
-              <Link href="/contact" className="hover:text-black">Contact</Link>
-              <Link href="/shop" className="hover:text-black">Shop</Link>
-            </div>
-          </div>
-        </Container>
-      </footer>
     </main>
   );
 }

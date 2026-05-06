@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth-client";
 import { PublicHeader } from "@/components/PublicHeader";
+import { Footer } from "@/components/Footer";
 import AccountSideBar from "@/components/AccountSideBar";
 
 export default async function ProtectedLayout({
@@ -20,6 +21,7 @@ export default async function ProtectedLayout({
       <div className="min-h-screen bg-[#F5F4F0]">
         {children}
       </div>
+      <Footer />
     </>
   );
 }

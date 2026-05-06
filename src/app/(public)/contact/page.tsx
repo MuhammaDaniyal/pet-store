@@ -44,7 +44,7 @@ export default function ContactPage() {
             className="max-w-lg text-[clamp(2.4rem,5vw,4.2rem)] font-semibold leading-[1.08] text-[#0A0A0A]"
             style={{ letterSpacing: "-0.03em" }}
           >
-            We're here.
+            We&apos;re here.
             <br />
             <em className="font-normal not-italic text-[#6A6860]">Say something.</em>
           </h1>
@@ -120,7 +120,7 @@ export default function ContactPage() {
                   Message sent.
                 </p>
                 <p className="mt-2 text-[13px] text-[#4A4945]">
-                  We'll get back to you within one business day.
+                  We&apos;ll get back to you within one business day.
                 </p>
                 <button
                   onClick={() => { setSent(false); setForm({ name: "", email: "", subject: "", message: "" }); }}
@@ -204,16 +204,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <footer className="relative z-10 mx-auto flex max-w-6xl items-center justify-between border-t border-[#D6D4CE] px-8 py-6 sm:px-12">
-        <span className="text-[11px] tracking-[0.2em] text-[#8A8880]">PETSTORE © 2024</span>
-        <div className="flex gap-6 text-[12px] text-[#8A8880]">
-          <Link href="/about" className="transition-colors hover:text-[#0A0A0A]">About</Link>
-          <Link href="/contact" className="text-[#0A0A0A]">Contact</Link>
-          <Link href="/shop" className="transition-colors hover:text-[#0A0A0A]">Shop</Link>
-        </div>
-      </footer>
     </main>
   );
 }

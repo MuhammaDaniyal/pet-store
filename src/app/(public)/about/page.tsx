@@ -138,16 +138,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <footer className="relative z-10 mx-auto flex max-w-6xl items-center justify-between border-t border-[#D6D4CE] px-8 py-6 sm:px-12">
-        <span className="text-[11px] tracking-[0.2em] text-[#8A8880]">PETSTORE © 2024</span>
-        <div className="flex gap-6 text-[12px] text-[#8A8880]">
-          <Link href="/about" className="text-[#0A0A0A]">About</Link>
-          <Link href="/contact" className="transition-colors hover:text-[#0A0A0A]">Contact</Link>
-          <Link href="/shop" className="transition-colors hover:text-[#0A0A0A]">Shop</Link>
-        </div>
-      </footer>
     </main>
   );
 }

@@ -2,9 +2,9 @@ import dotenv from "dotenv";
 import path from "path";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
-import { Category } from "../lib/models/Category";
-import { Product } from "../lib/models/Product";
-import { User } from "../lib/models/User";
+import { Category } from "../src/lib/models/Category";
+import { Product } from "../src/lib/models/Product";
+import { User } from "../src/lib/models/User";
 
 // Load .env.local
 dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
@@ -241,9 +241,9 @@ async function seed() {
     ...p,
     category: catMap[p.animalType === "dog" ? "dogs"
       : p.animalType === "cat" ? "cats"
-      : p.animalType === "bird" ? "birds"
-      : p.animalType === "fish" ? "fish"
-      : "reptiles"],
+        : p.animalType === "bird" ? "birds"
+          : p.animalType === "fish" ? "fish"
+            : "reptiles"],
     isActive: true,
   }));
 
