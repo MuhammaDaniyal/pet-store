@@ -1,45 +1,16 @@
-@import "tailwindcss";
-/* 
-*/
-@theme {
-  /* Backgrounds & Borders */
-  --color-background: #f5f4f0;
-  --color-surface: #edece8;
-  --color-border: #d6d4ce;
+/* Import the split architecture */
+@import "../styles/fonts.css";
+@import "../styles/tailwind.css";
+@import "../styles/theme.css";
 
-  /* Typography Colors */
-  --color-primary: #0a0a0a;
-  --color-secondary: #4a4945;
-  --color-muted: #8a8880;
-
-  /* Accents & States */
-  --color-accent: #0a0a0a;
-  --color-accent-hover: #1a1a1a;
-  --color-error: #c0392b;
-  --color-success: #1e6b45;
-
-  /* Fonts */
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-
-  /* Border Radius */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-}
-
-/*
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  } 
-*/
-
+/* =========================================
+          GLOBAL HTML/BODY STYLES
+   ========================================= */
 html {
   background-color: var(--color-background);
   color: var(--color-primary);
-  font-family: var(--font-sans);
+  /* Updated to use Figma's body font variable */
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -48,7 +19,8 @@ body {
   min-height: 100vh;
   background-color: var(--color-background);
   color: var(--color-primary);
-  font-family: var(--font-sans);
+  /* Updated to use Figma's body font variable */
+  font-family: var(--font-body);
   overflow-x: hidden;
 }
 
@@ -77,3 +49,136 @@ input:-webkit-autofill:focus {
   background: var(--color-border);
   border-radius: 99px;
 } 
+
+/* =========================================
+              RESPONSIVE GRIDS
+   ========================================= */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 380px));
+  gap: 24px;
+  justify-content: start;
+}
+
+@media (max-width: 1440px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 380px));
+    justify-content: center;
+  }
+}
+
+@media (max-width: 875px) {
+  .product-grid {
+    grid-template-columns: minmax(0, 380px);
+  }
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 380px));
+  gap: 24px;
+  justify-content: start;
+}
+ 
+@media (max-width: 1410px) {
+  .favorites-grid {
+    grid-template-columns: repeat(2, minmax(0, 380px));
+  }
+}
+
+@media (max-width: 1341px) {
+  .favorites-grid {
+    grid-template-columns: minmax(0, 380px);
+    justify-content: center;
+  }
+}
+
+.pet-card {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.pet-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.order-cards,
+.address-cards,
+.payment-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .order-cards,
+  .address-cards,
+  .payment-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featured-carousel {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.featured-carousel .pet-card {
+  min-width: 300px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .featured-carousel .pet-card {
+    min-width: 280px;
+  }
+}
+
+.container {
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 875px) {
+  .shop-layout {
+    flex-direction: column;
+  }
+  
+  .filter-sidebar {
+    width: 100%;
+    position: relative;
+  }
+}

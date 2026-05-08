@@ -1,0 +1,161 @@
+@theme {
+  /* =========================================
+                ORIGINAL VARIABLES
+     ========================================= */
+  /* Backgrounds & Borders */
+  --color-background: #F7FFF7; /* Was #f5f4f0, now Figma Light */
+  --color-surface: #FFFFFF;    /* Was #edece8, now Figma White Card */
+  --color-border: #E5E7EB;     /* Was #d6d4ce, now Figma Grey Light */
+
+  /* Typography Colors */
+  --color-primary: #1A535C;    /* Was #0a0a0a, now Figma Dark Teal */
+  --color-secondary: #6B7280;  /* Was #4a4945, now Figma Grey */
+  --color-muted: #6B7280;      /* Was #8a8880, now Figma Muted Foreground */
+
+  /* Accents & States */
+  --color-accent: #FF6B35;       /* Was #0a0a0a, now Figma Primary Orange */
+  --color-accent-hover: #E55A2B; /* Slightly darker orange for your hover state */
+  --color-error: #d4183d;        /* Was #c0392b, now Figma Destructive */
+  --color-success: #1e6b45;      /* Kept from your original (no Figma equivalent) */
+
+  /* Fonts (Updated to Figma Font Names) */
+  --font-heading: 'Libre Baskerville', serif;
+  --font-body: 'Cormorant Garamond', serif;
+  --font-ui: 'Outfit', sans-serif;
+
+  /* Your original Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* =========================================
+                  EXTRA VARIABLES
+     ========================================= */
+  --color-primary-orange: #FF6B35;
+  --color-secondary-turquoise: #4ECDC4;
+  --color-accent-yellow: #FFE66D;
+  --color-dark-teal: #1A535C;
+  --color-light: #F7FFF7;
+  --color-white: #FFFFFF;
+  --color-grey: #6B7280;
+  --color-grey-light: #E5E7EB;
+
+  /* Figma Component/UI Variables */
+  --color-card: #ffffff;
+  --color-card-foreground: #1A535C;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #1A535C;
+  --color-destructive-foreground: #ffffff;
+  --color-input: #E5E7EB;
+  --color-input-background: #ffffff;
+  --color-ring: #4ECDC4;
+  
+  /* Figma Chart Colors */
+  --color-chart-1: #FF6B35;
+  --color-chart-2: #4ECDC4;
+  --color-chart-3: #FFE66D;
+  --color-chart-4: #1A535C;
+  --color-chart-5: #F7FFF7;
+}
+
+@layer base {
+  /* Figma Luxury Typography System */
+  h1 {
+    font-family: var(--font-heading);
+    font-size: 4.5rem;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--color-primary);
+  }
+
+  h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: var(--color-primary);
+  }
+
+  h3 {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-primary);
+  }
+
+  h4 {
+    font-family: var(--font-heading);
+    font-size: 1.375rem;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--color-primary);
+  }
+
+  p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--color-secondary);
+  }
+
+  label {
+    font-family: var(--font-ui);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-primary);
+  }
+
+  button {
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+  }
+
+  input, textarea, select {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  
+  input::placeholder, textarea::placeholder {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: #9CA3AF;
+  }
+
+  /* For DARK MODE */
+  .dark {
+    /* Backgrounds & Borders */
+    --color-background: #0A1618; 
+    --color-surface: #112326;    /* Slightly lighter than background for cards */
+    --color-border: #1E3A3F;     /* Subtle dark border so things don't bleed together */
+
+    /* Typography Colors */
+    --color-primary: #F7FFF7;    /* Text inverts to your Figma Light color */
+    --color-secondary: #9CA3AF;  /* A lighter grey for secondary text readability */
+    --color-muted: #6B7280;      /* Keeps the original grey for muted elements */
+
+    /* Accents & States */
+    --color-accent: #FF6B35;       /* Your brand orange stays exactly the same! */
+    --color-accent-hover: #FF8B61; /* Hover gets LIGHTER in dark mode (instead of darker) */
+    --color-error: #EF4444;        /* A brighter red to ensure contrast against dark backgrounds */
+    --color-success: #22C55E;      /* A brighter green for success states */
+
+    /* Figma Component / UI Variables */
+    --color-card: var(--color-surface);
+    --color-card-foreground: var(--color-primary);
+    --color-popover: var(--color-surface);
+    --color-popover-foreground: var(--color-primary);
+    --color-input: var(--color-border);
+    --color-input-background: var(--color-surface);
+  }
+}
