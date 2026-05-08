@@ -32,7 +32,6 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background text-primary">
         <ThemeProviderWrapper>
-          <TopBar />
           {children}
         </ThemeProviderWrapper>
       </body>
