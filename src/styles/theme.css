@@ -3,9 +3,9 @@
                 ORIGINAL VARIABLES
      ========================================= */
   /* Backgrounds & Borders */
-  --color-background: #F7FFF7; /* Was #f5f4f0, now Figma Light */
-  --color-surface: #FFFFFF;    /* Was #edece8, now Figma White Card */
-  --color-border: #E5E7EB;     /* Was #d6d4ce, now Figma Grey Light */
+  --color-background: #FAF7F2;   /* warm cream, replaces #F7FFF7 */
+  --color-surface: #FFFFFF;       /* keep cards pure white */
+  --color-border: #E8E4DC;        /* slightly warmer border to match cream bg */
 
   /* Typography Colors */
   --color-primary: #1A535C;    /* Was #0a0a0a, now Figma Dark Teal */
