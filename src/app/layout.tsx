@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProviderWrapper } from "@/components/ThemeProvider";
+import { TopBar } from "@/components/TopBar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -26,9 +28,13 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-primary">
-        {children}
+        <ThemeProviderWrapper>
+          <TopBar />
+          {children}
+        </ThemeProviderWrapper>
       </body>
     </html>
   );
