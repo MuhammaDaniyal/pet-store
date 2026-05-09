@@ -10,10 +10,20 @@ const VERIFICATION_CODE_LENGTH = 6;
 const VERIFICATION_CODE_EXPIRY_MINUTES = 15;
 const MAX_VERIFICATION_ATTEMPTS = 5;
 
+export type SignupAddress = {
+  street: string;
+  city: string;
+  province: string;
+  postalCode: string;
+  country: string;
+};
+
 export type CreateSignupVerificationInput = {
   name: string;
   email: string;
   password: string;
+  phone: string;
+  address: SignupAddress;
 };
 
 export type VerificationCheckResult =
@@ -57,6 +67,8 @@ export async function createSignupVerification(input: CreateSignupVerificationIn
     name: input.name,
     email: normalizeEmail(input.email),
     password: input.password,
+    phone: input.phone,
+    address: input.address,
     codeHash,
     attempts: 0,
     expiresAt,
@@ -107,6 +119,8 @@ export async function verifySignupVerificationCode(
     name: pending.name,
     email: pending.email,
     password: pending.password,
+    phone: pending.phone,
+    address: pending.address,
   } satisfies CreateSignupVerificationInput;
 
   await pending.deleteOne();

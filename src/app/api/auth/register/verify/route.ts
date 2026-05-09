@@ -52,6 +52,8 @@ export async function POST(request: Request) {
     );
   }
 
+  const signup = verificationResult.signup;
+
   const existingUser = await findUserByEmail(email);
 
   if (existingUser) {
@@ -59,9 +61,11 @@ export async function POST(request: Request) {
   }
 
   const user = await createUser({
-    name: verificationResult.signup.name,
-    email: verificationResult.signup.email,
-    password: verificationResult.signup.password,
+    name: signup.name,
+    email: signup.email,
+    password: signup.password,
+    phone: signup.phone,
+    address: signup.address,
     role: "user",
   });
 

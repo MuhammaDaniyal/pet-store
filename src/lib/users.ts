@@ -36,6 +36,14 @@ export type CreateUserInput = {
   name: string;
   email: string;
   password: string;
+  phone?: string;
+  address?: {
+    street: string;
+    city: string;
+    province: string;
+    postalCode: string;
+    country: string;
+  };
   role?: UserRole;
 };
 
@@ -120,6 +128,8 @@ export async function createUser(input: CreateUserInput) {
     name: input.name,
     email: input.email.toLowerCase(),
     password: input.password,
+    phone: input.phone,
+    address: input.address,
     role: input.role ?? "user",
   });
 

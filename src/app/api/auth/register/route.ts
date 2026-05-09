@@ -14,6 +14,14 @@ type RegisterBody = {
   email?: string;
   password?: string;
   confirmPassword?: string;
+  phone?: string;
+  address?: {
+    street?: string;
+    city?: string;
+    province?: string;
+    postalCode?: string;
+    country?: string;
+  };
 };
 
 type RegisterResponse = {
@@ -43,6 +51,13 @@ export async function POST(request: Request) {
   const email = body.email?.trim().toLowerCase() ?? "";
   const password = body.password ?? "";
   const confirmPassword = body.confirmPassword ?? "";
+  const phone = body.phone?.trim() ?? "";
+  const address = body.address ?? {};
+  const street = address.street?.trim() ?? "";
+  const city = address.city?.trim() ?? "";
+  const province = address.province?.trim() ?? "";
+  const postalCode = address.postalCode?.trim() ?? "";
+  const country = address.country?.trim() ?? "";
 
   const fieldErrors: Record<string, string> = {};
 
@@ -65,6 +80,16 @@ export async function POST(request: Request) {
   if (password && confirmPassword && password !== confirmPassword) {
     fieldErrors.confirmPassword = "Passwords do not match.";
   }
+  if (!phone) {
+    fieldErrors.phone = "Phone number is required.";
+  } else if (!/^\+\d{8,15}$/.test(phone)) {
+    fieldErrors.phone = "Enter a valid phone number in international format, like +923001234567.";
+  }
+  if (!street) fieldErrors.street = "Street address is required.";
+  if (!city) fieldErrors.city = "City is required.";
+  if (!province) fieldErrors.province = "Province is required.";
+  if (!postalCode) fieldErrors.postalCode = "Postal code is required.";
+  if (!country) fieldErrors.country = "Country is required.";
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
@@ -74,6 +99,26 @@ export async function POST(request: Request) {
   if (Object.keys(fieldErrors).length > 0) {
     return NextResponse.json(
       { message: "Please fix the highlighted fields.", fieldErrors },
+      { status: 400 },
+    );
+  }
+
+  // Defensive check: ensure no required signup fields are missing before creating verification
+  const missing: Record<string, string> = {};
+  if (!name) missing.name = "Full name is required.";
+  if (!email) missing.email = "Email is required.";
+  if (!password) missing.password = "Password is required.";
+  if (!confirmPassword) missing.confirmPassword = "Please confirm your password.";
+  if (!phone) missing.phone = "Phone number is required.";
+  if (!street) missing.street = "Street address is required.";
+  if (!city) missing.city = "City is required.";
+  if (!province) missing.province = "Province is required.";
+  if (!postalCode) missing.postalCode = "Postal code is required.";
+  if (!country) missing.country = "Country is required.";
+
+  if (Object.keys(missing).length > 0) {
+    return NextResponse.json(
+      { message: "Please fix the highlighted fields.", fieldErrors: missing },
       { status: 400 },
     );
   }
@@ -98,6 +143,14 @@ export async function POST(request: Request) {
     name,
     email,
     password: hashedPassword,
+    phone,
+    address: {
+      street,
+      city,
+      province,
+      postalCode,
+      country,
+    },
   });
 
   try {

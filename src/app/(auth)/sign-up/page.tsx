@@ -9,6 +9,12 @@ type FieldErrors = {
   email?: string;
   password?: string;
   confirmPassword?: string;
+  phone?: string;
+  street?: string;
+  city?: string;
+  province?: string;
+  postalCode?: string;
+  country?: string;
   form?: string;
 };
 
@@ -25,8 +31,24 @@ export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [phoneDigits, setPhoneDigits] = useState("");
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [province, setProvince] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [country, setCountry] = useState("");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const phoneNumber = phoneDigits ? `+${phoneDigits}` : "";
+
+  function handlePhoneChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setPhoneDigits(event.target.value.replace(/\D/g, ""));
+  }
+
+  function validatePhoneNumber(value: string) {
+    return /^\+\d{8,15}$/.test(value);
+  }
 
   function validateForm() {
     const errors: FieldErrors = {};
@@ -38,6 +60,16 @@ export default function SignUpPage() {
     if (password && confirmPassword && password !== confirmPassword) {
       errors.confirmPassword = "Passwords do not match.";
     }
+    if (!phoneDigits) {
+      errors.phone = "Phone number is required.";
+    } else if (!validatePhoneNumber(phoneNumber)) {
+      errors.phone = "Enter a valid phone number in international format, like +923001234567.";
+    }
+    if (!street.trim()) errors.street = "Street address is required.";
+    if (!city.trim()) errors.city = "City is required.";
+    if (!province.trim()) errors.province = "Province is required.";
+    if (!postalCode.trim()) errors.postalCode = "Postal code is required.";
+    if (!country.trim()) errors.country = "Country is required.";
 
     return errors;
   }
@@ -65,6 +97,14 @@ export default function SignUpPage() {
           email,
           password,
           confirmPassword,
+          phone: phoneNumber,
+          address: {
+            street,
+            city,
+            province,
+            postalCode,
+            country,
+          },
         }),
       });
 
@@ -94,13 +134,13 @@ export default function SignUpPage() {
     "w-full rounded-sm border border-border bg-surface px-4 py-3 text-primary placeholder:text-muted focus:border-[#0A0A0A] focus:outline-none";
 
   return (
-    <section className="w-full max-w-md rounded-lg border border-border bg-surface p-10">
+    <section className="w-full max-w-3xl rounded-lg border border-border bg-surface p-10">
       <div className="space-y-2">
         <h1 className="text-2xl font-medium text-primary">Create an account</h1>
         <p className="text-sm text-secondary">Join PetStore and find your perfect companion</p>
       </div>
 
-      <form className="mt-8 space-y-5" onSubmit={handleSubmit} noValidate>
+      <form className="mt-8 grid gap-5 sm:grid-cols-2" onSubmit={handleSubmit} noValidate>
         <div className="space-y-2">
           <label htmlFor="name" className="text-sm font-medium text-primary">
             Full name
@@ -171,12 +211,119 @@ export default function SignUpPage() {
           ) : null}
         </div>
 
-        {fieldErrors.form ? <p className="text-sm text-error">{fieldErrors.form}</p> : null}
+        <div className="space-y-2 sm:col-span-2">
+          <label htmlFor="phone" className="text-sm font-medium text-primary">
+            Phone number
+          </label>
+          <div className="flex overflow-hidden rounded-sm border border-border bg-surface focus-within:border-[#0A0A0A]">
+            <span className="flex items-center border-r border-border px-4 text-sm text-muted">+</span>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              inputMode="numeric"
+              autoComplete="tel"
+              value={phoneDigits}
+              onChange={handlePhoneChange}
+              className="w-full bg-transparent px-4 py-3 text-primary placeholder:text-muted focus:outline-none"
+              placeholder="923001234567"
+              maxLength={15}
+            />
+          </div>
+          {fieldErrors.phone ? <p className="text-xs text-error">{fieldErrors.phone}</p> : null}
+        </div>
+
+        <div className="space-y-2 sm:col-span-2">
+          <label htmlFor="street" className="text-sm font-medium text-primary">
+            Street address
+          </label>
+          <input
+            id="street"
+            name="street"
+            type="text"
+            autoComplete="street-address"
+            value={street}
+            onChange={(event) => setStreet(event.target.value)}
+            className={inputClassName}
+            placeholder="123 Main Street"
+          />
+          {fieldErrors.street ? <p className="text-xs text-error">{fieldErrors.street}</p> : null}
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="city" className="text-sm font-medium text-primary">
+            City
+          </label>
+          <input
+            id="city"
+            name="city"
+            type="text"
+            autoComplete="address-level2"
+            value={city}
+            onChange={(event) => setCity(event.target.value)}
+            className={inputClassName}
+            placeholder="Lahore"
+          />
+          {fieldErrors.city ? <p className="text-xs text-error">{fieldErrors.city}</p> : null}
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="province" className="text-sm font-medium text-primary">
+            Province / state
+          </label>
+          <input
+            id="province"
+            name="province"
+            type="text"
+            autoComplete="address-level1"
+            value={province}
+            onChange={(event) => setProvince(event.target.value)}
+            className={inputClassName}
+            placeholder="Punjab"
+          />
+          {fieldErrors.province ? <p className="text-xs text-error">{fieldErrors.province}</p> : null}
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="postalCode" className="text-sm font-medium text-primary">
+            Postal code
+          </label>
+          <input
+            id="postalCode"
+            name="postalCode"
+            type="text"
+            autoComplete="postal-code"
+            value={postalCode}
+            onChange={(event) => setPostalCode(event.target.value)}
+            className={inputClassName}
+            placeholder="54000"
+          />
+          {fieldErrors.postalCode ? <p className="text-xs text-error">{fieldErrors.postalCode}</p> : null}
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="country" className="text-sm font-medium text-primary">
+            Country
+          </label>
+          <input
+            id="country"
+            name="country"
+            type="text"
+            autoComplete="country-name"
+            value={country}
+            onChange={(event) => setCountry(event.target.value)}
+            className={inputClassName}
+            placeholder="Pakistan"
+          />
+          {fieldErrors.country ? <p className="text-xs text-error">{fieldErrors.country}</p> : null}
+        </div>
+
+        {fieldErrors.form ? <p className="text-sm text-error sm:col-span-2">{fieldErrors.form}</p> : null}
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded-md bg-accent py-3 text-sm font-medium text-[#F5F4F0] transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-70"
+          className="w-full rounded-md bg-accent py-3 text-sm font-medium text-[#F5F4F0] transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-70 sm:col-span-2"
         >
           {isSubmitting ? "Creating account..." : "Create account"}
         </button>
