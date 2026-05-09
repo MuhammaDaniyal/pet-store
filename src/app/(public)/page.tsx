@@ -3,6 +3,7 @@ import Image from "next/image";
 import BlurText from "@/components/BlurText";
 import SplitText from "@/components/SplitText";
 import AnimatedContent from "@/components/AnimatedContent";
+import Magnet from "@/components/Magnet";
 
 const Container = ({ children }: { children: React.ReactNode }) => (
   <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -80,18 +81,22 @@ export default function HomePage() {
             </p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <Link
-                href="/sign-up"
-                className="rounded-full bg-accent px-7 py-3 text-[13px] font-medium text-[#F5F4F0] hover:bg-[#2A2A2A]"
-              >
-                Create account
-              </Link>
-              <Link
-                href="/shop"
-                className="rounded-full border border-[#C8C6C0] px-7 py-3 text-[13px] font-medium text-primary hover:border-[#0A0A0A]"
-              >
-                Browse shop
-              </Link>
+              <Magnet padding={50} disabled={false} magnetStrength={10}>
+                <Link
+                  href="/sign-up"
+                  className="rounded-full bg-accent px-7 py-3 mx-2 text-[13px] font-medium text-[#F5F4F0] hover:bg-[#2A2A2A] hover:scale-[1.1] transition-all duration-300"
+                  >
+                  Create account
+                </Link>
+              </Magnet>
+              <Magnet padding={50} disabled={false} magnetStrength={10}>
+                <Link
+                  href="/shop"
+                  className="mx-2 rounded-full border border-[#C8C6C0] px-7 py-3 text-[13px] text-[#1A535C] font-medium text-primary transition-all duration-300 hover:scale-[1.1] hover:bg-[#2A2A2A] hover:border-[#2A2A2A] hover:text-[#FAF7F2]"
+                >
+                  Browse shop
+                </Link>
+              </Magnet>
             </div>
           </div>
         </Container>
