@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import BlurText from "@/components/BlurText";
 import SplitText from "@/components/SplitText";
+import AnimatedContent from "@/components/AnimatedContent";
 
 const Container = ({ children }: { children: React.ReactNode }) => (
   <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -116,23 +117,34 @@ export default function HomePage() {
                 title: "Everything in one place.",
                 body: "Wishlist, orders, and fast reordering.",
               },
-            ].map((card) => (
-              <div
+            ].map((card, index) => (
+              <AnimatedContent
                 key={card.tag}
-                className="rounded-2xl border border-border bg-surface p-7 sm:p-8"
+                distance={40}
+                direction="vertical"
+                reverse={false}
+                duration={0.8}
+                ease="power3.out"
+                initialOpacity={0}
+                animateOpacity
+                scale={0.95}
+                threshold={0.1}
+                delay={0.15 + index * 0.15} 
               >
-                <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted">
-                  {card.tag}
-                </span>
+                <div className="rounded-2xl border border-border bg-surface p-7 sm:p-8 h-full">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted">
+                    {card.tag}
+                  </span>
 
-                <p className="mt-4 text-lg font-medium text-primary">
-                  {card.title}
-                </p>
+                  <p className="mt-4 text-lg font-medium text-primary">
+                    {card.title}
+                  </p>
 
-                <p className="mt-2 text-sm leading-relaxed text-secondary">
-                  {card.body}
-                </p>
-              </div>
+                  <p className="mt-2 text-sm leading-relaxed text-secondary">
+                    {card.body}
+                  </p>
+                </div>
+              </AnimatedContent>
             ))}
           </div>
         </Container>
