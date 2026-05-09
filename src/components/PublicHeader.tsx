@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth-client";
+import { ClientNav } from "./ClientNav"; // <-- Import your new component!
 
 export async function PublicHeader() {
+  // Safe server-side fetch
   const user = await getCurrentUser();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-[#cfc9be]/40 shadow-sm backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-[#cfc9be]/40 dark:bg-background/80 shadow-sm backdrop-blur-md">
       {/* Localized Grain Overlay */}
       <div
         aria-hidden
@@ -20,41 +22,9 @@ export async function PublicHeader() {
         <Link href="/" className="text-[11px] font-bold tracking-[0.28em] text-primary">
           PETSTORE
         </Link>
-        <nav className="flex items-center gap-6 text-[12px] text-secondary">
-          <Link href="/about" className="transition-colors hover:text-primary">
-            About
-          </Link>
-          <Link href="/contact" className="font-medium text-primary">
-            Contact
-          </Link>
-          <Link href="/shop" className="transition-colors hover:text-primary">
-            Shop
-          </Link>
-
-          {user ? (
-            <>
-              <Link href="/cart" className="transition-colors hover:text-primary">
-                Cart
-              </Link>
-              <Link href="/checkout" className="transition-colors hover:text-primary">
-                Checkout
-              </Link>
-              <Link
-                href="/account"
-                className="rounded-full border border-border px-5 py-2 text-[13px] transition-colors hover:border-primary hover:text-primary"
-              >
-                {user.name}
-              </Link>
-            </>
-          ) : (
-            <Link
-              href="/sign-in"
-              className="rounded-full border border-border px-5 py-2 text-[13px] transition-colors hover:border-primary hover:text-primary"
-            >
-              Sign in
-            </Link>
-          )}
-        </nav>
+        
+        <ClientNav user={user} />
+        
       </div>
     </header>
   );
