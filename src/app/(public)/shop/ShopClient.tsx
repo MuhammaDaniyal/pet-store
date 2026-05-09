@@ -121,19 +121,17 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
           
           {/* Image Header container */}
           <div className="relative h-56 w-full bg-muted/50">
-            <Link href={`/shop/${p._id}`} className="block h-full w-full">
-              {p.images && p.images.length > 0 ? (
-                <Image
-                  src={p.images[0]}
-                  alt={p.name}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  width={400}
-                  height={224}
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center text-4xl">🐾</div>
-              )}
-            </Link>
+            {p.images && p.images.length > 0 ? (
+              <Image
+                src={p.images[0]}
+                alt={p.name}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center text-4xl">🐾</div>
+            )}
 
             {/* Badges */}
             {p.isFeatured && (

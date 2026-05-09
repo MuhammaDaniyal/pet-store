@@ -45,6 +45,31 @@ interface CheckoutFieldErrors {
   form?: string;
 }
 
+interface CheckoutAddress {
+  street: string | null;
+  city: string | null;
+  province: string | null;
+  postalCode: string | null;
+  country: string | null;
+}
+
+interface CheckoutProfile {
+  name: string;
+  phone: string | null;
+  address: CheckoutAddress | null;
+}
+
+function formatStreetAddress(address: CheckoutAddress | null) {
+  if (!address) {
+    return "";
+  }
+
+  return [address.street, address.city, address.province, address.country]
+    .map((part) => part?.trim())
+    .filter((part): part is string => Boolean(part))
+    .join(", ");
+}
+
 export default function CheckoutPage() {
   const router = useRouter();
   const [cart, setCart] = useState<CartDocument | null>(null);
@@ -91,6 +116,46 @@ export default function CheckoutPage() {
     }
 
     loadCart();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadProfile() {
+      try {
+        const response = await fetch("/api/auth/profile", { cache: "no-store" });
+
+        if (!response.ok) {
+          return;
+        }
+
+        const data = (await response.json()) as { profile?: CheckoutProfile };
+
+        if (!mounted || !data.profile) {
+          return;
+        }
+
+        const { address, name, phone } = data.profile;
+        const streetAddress = formatStreetAddress(address);
+
+        setForm((current) => ({
+          fullName: current.fullName || name || "",
+          phone: current.phone || phone || "",
+          street: current.street || streetAddress,
+          city: current.city || address?.city || "",
+          province: current.province || address?.province || "",
+          postalCode: current.postalCode || address?.postalCode || "",
+        }));
+      } catch {
+        return;
+      }
+    }
+
+    loadProfile();
 
     return () => {
       mounted = false;
