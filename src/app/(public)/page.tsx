@@ -33,9 +33,6 @@ export default function HomePage() {
           <source src="/cat-walking-transparent.mp4" type="video/mp4" />
         </video>
 
-        {/* Semi-transparent Overlay 
-        <div className="absolute inset-0 bg-background/50 -z-10" />*/}
-
         <Container>
           <div className="relative mx-auto max-w-4xl">
             <div
@@ -45,7 +42,7 @@ export default function HomePage() {
               PS
             </div>
 
-            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-muted sm:mb-6">
+            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-[#6B7280] sm:mb-6">
               Premium pet care — since 2024
             </p>
 
@@ -54,7 +51,7 @@ export default function HomePage() {
               delay={220} 
               animateBy="words" 
               direction="top"
-              className="mx-auto max-w-3xl items-center justify-center text-[clamp(3rem,7vw,5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-primary"
+              className="mx-auto max-w-3xl items-center justify-center text-[clamp(3rem,7vw,5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-[#1A535C]"
             />
             <div className="flex flex-wrap items-center justify-center">
               <BlurText 
@@ -69,13 +66,13 @@ export default function HomePage() {
                 delay={420} 
                 animateBy="words" 
                 direction="top"
-                className="text-[clamp(3rem,7vw,5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-primary"
+                className="text-[clamp(3rem,7vw,5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-[#1A535C]"
               />
             </div>
 
             <div className="mx-auto my-8 h-px w-20 bg-[#D6D4CE]" />
 
-            <p className="mx-auto max-w-xl text-[15px] leading-relaxed text-secondary sm:text-base">
+            <p className="mx-auto max-w-xl text-[15px] leading-relaxed text-[#6B7280] sm:text-base">
               Thoughtful products, reliable delivery, and a focused experience
               for pet owners who care about quality.
             </p>
@@ -84,7 +81,7 @@ export default function HomePage() {
               <Magnet padding={50} disabled={false} magnetStrength={10}>
                 <Link
                   href="/sign-up"
-                  className="rounded-full bg-accent px-7 py-3 mx-2 text-[13px] font-medium text-[#F5F4F0] hover:bg-[#2A2A2A] hover:scale-[1.1] transition-all duration-300"
+                  className="mx-2 rounded-full bg-accent px-7 py-3 text-[13px] font-medium text-[#F5F4F0] transition-all duration-200 hover:scale-[1.1] hover:shadow-[0_0_15px_#FF6B35]"
                   >
                   Create account
                 </Link>
@@ -92,7 +89,7 @@ export default function HomePage() {
               <Magnet padding={50} disabled={false} magnetStrength={10}>
                 <Link
                   href="/shop"
-                  className="mx-2 rounded-full border border-[#C8C6C0] px-7 py-3 text-[13px] text-[#1A535C] font-medium text-primary transition-all duration-300 hover:scale-[1.1] hover:bg-[#2A2A2A] hover:border-[#2A2A2A] hover:text-[#FAF7F2]"
+                  className="mx-2 rounded-full border border-[#C8C6C0] px-7 py-3 text-[13px] font-medium text-[#1A535C] transition-all duration-300 hover:scale-[1.1] hover:border-[#2A2A2A] hover:bg-[#2A2A2A] hover:text-[#FAF7F2]"
                 >
                   Browse shop
                 </Link>
