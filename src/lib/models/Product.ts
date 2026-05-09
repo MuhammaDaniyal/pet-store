@@ -15,7 +15,7 @@ const ProductSchema = new Schema(
     // Animal-specific fields
     animalType: {
       type: String,
-      enum: ["dog", "cat", "bird", "fish", "reptile", "accessory", "food"],
+      enum: ["dog", "cat", "bird", "fish", "small-animal", "wild-animal", "other"],
       required: true,
     },
     breed: { type: String },   // "Golden Retriever", only for live animals
@@ -28,6 +28,10 @@ const ProductSchema = new Schema(
     reviewCount: { type: Number, default: 0 },
     isFeatured: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },
+
+    tags: [{ type: String }],           // for search/filtering e.g. "puppy", "indoor"
+    discount: { type: Number, default: 0 }, // percentage discount
+    weight: { type: String },           // (kg), useful for shipping
   },
   { timestamps: true }
 );

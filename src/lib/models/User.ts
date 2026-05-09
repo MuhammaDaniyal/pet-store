@@ -19,6 +19,7 @@ const UserSchema = new Schema(
       country: String,
     },
     isActive: { type: Boolean, default: true },
+    wishlist: [{ type: Schema.Types.ObjectId, ref: "Product" }],
   },
   { timestamps: true }
 );

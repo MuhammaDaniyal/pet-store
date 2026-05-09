@@ -6,6 +6,11 @@ const OrderItemSchema = new Schema({
   price: { type: Number, required: true },  // snapshot
   quantity: { type: Number, required: true },
   image: { type: String },
+  notes: { type: String },         // buyer notes at checkout
+  couponCode: { type: String },
+  discount: { type: Number, default: 0 },
+  isPaid: { type: Boolean, default: false },
+  paidAt: { type: Date },
 });
 
 const OrderSchema = new Schema(
