@@ -1,6 +1,6 @@
 "use client";
 
-import AccountSideBar from "@/components/AccountSideBar";
+import AccountSideBar from "@/components/account/AccountSideBar";
 
 export default function AccountLayout({
   children,

@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth-client";
 import { PublicHeader } from "@/components/PublicHeader";
 import { Footer } from "@/components/Footer";
-import AccountSideBar from "@/components/AccountSideBar";
+import AccountSideBar from "@/components/account/AccountSideBar";
 
 export default async function ProtectedLayout({
   children,
