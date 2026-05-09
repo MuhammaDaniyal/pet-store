@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <main className="relative min-h-screen bg-background font-sans">
+    <main className="relative min-h-screen font-sans">
 
       {/* Grain */}
       <div

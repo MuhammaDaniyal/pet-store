@@ -11,7 +11,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export default function HomePage() {
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-background font-sans">
+    <main className="relative isolate min-h-screen overflow-hidden font-sans">
 
       {/* Grain */}
       <div
@@ -178,6 +178,8 @@ export default function HomePage() {
                   src={cat.img}
                   alt={cat.name}
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  priority={cat.name === "Cats" || cat.name === "Dogs" || cat.name === "Birds"}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 

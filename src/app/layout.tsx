@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { ThemeProviderWrapper } from "@/components/ThemeProvider";
+import ClickSpark from "@/components/ClickSpark";
 import { TopBar } from "@/components/TopBar";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,12 +31,21 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-primary">
         <ThemeProviderWrapper>
-          {children}
+          <ClickSpark
+            sparkColor="#FF6B35"
+            sparkSize={10}
+            sparkRadius={15}
+            sparkCount={8}
+            duration={400}
+          >
+            <TopBar />
+            {children}
+          </ClickSpark>
         </ThemeProviderWrapper>
       </body>
     </html>
