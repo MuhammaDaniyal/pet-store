@@ -5,7 +5,7 @@ export async function PublicHeader() {
   const user = await getCurrentUser();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 shadow-sm backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-[#cfc9be]/40 shadow-sm backdrop-blur-md">
       {/* Localized Grain Overlay */}
       <div
         aria-hidden

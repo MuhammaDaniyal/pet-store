@@ -9,7 +9,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export default function HomePage() {
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-background px-4 font-sans sm:px-6 lg:px-8">
+    <main className="relative isolate min-h-screen overflow-hidden bg-background font-sans">
 
       {/* Grain */}
       <div
@@ -23,6 +23,15 @@ export default function HomePage() {
 
       {/* HERO */}
       <section className="relative z-10 py-20 text-center sm:py-28 lg:py-32">
+
+        {/* Background Video */}
+        <video autoPlay loop muted playsInline className="absolute inset-0 h-full w-full object-cover -z-20">
+          <source src="/cat-walking-transparent.mp4" type="video/mp4" />
+        </video>
+
+        {/* Semi-transparent Overlay 
+        <div className="absolute inset-0 bg-background/50 -z-10" />*/}
+
         <Container>
           <div className="relative mx-auto max-w-4xl">
             <div
