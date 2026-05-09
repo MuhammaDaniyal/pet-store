@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import BlurText from "@/components/BlurText";
 
 const Container = ({ children }: { children: React.ReactNode }) => (
   <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -45,10 +46,29 @@ export default function HomePage() {
               Premium pet care — since 2024
             </p>
 
-            <h1 className="mx-auto max-w-3xl text-[clamp(3rem,7vw,5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-primary">
-              Every companion <br />
-              <span className="text-[#6A6860] font-normal">deserves</span> the best.
-            </h1>
+            <BlurText 
+              text="Every companion" 
+              delay={220} 
+              animateBy="words" 
+              direction="top"
+              className="mx-auto max-w-3xl items-center justify-center text-[clamp(3rem,7vw,5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-primary"
+            />
+            <div className="flex flex-wrap items-center justify-center">
+              <BlurText 
+                text="deserves" 
+                delay={420} 
+                animateBy="words" 
+                direction="top"
+                className="text-[clamp(3rem,7vw,5rem)] font-normal leading-[0.95] tracking-[-0.04em] text-[#6A6860]"
+              />
+              <BlurText 
+                text=" the best." 
+                delay={420} 
+                animateBy="words" 
+                direction="top"
+                className="text-[clamp(3rem,7vw,5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-primary"
+              />
+            </div>
 
             <div className="mx-auto my-8 h-px w-20 bg-[#D6D4CE]" />
 
@@ -76,7 +96,7 @@ export default function HomePage() {
       </section>
 
       {/* CARDS */}
-      <section className="relative z-10 pb-20 sm:pb-24 lg:pb-28">
+      <section className="relative z-10 pb-20 sm:pb-24 lg:pb-28 pt-10">
         <Container>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {[
