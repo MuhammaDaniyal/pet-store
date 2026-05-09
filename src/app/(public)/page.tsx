@@ -1,9 +1,13 @@
+"use client"
+
 import Link from "next/link";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import BlurText from "@/components/BlurText";
 import SplitText from "@/components/SplitText";
 import AnimatedContent from "@/components/AnimatedContent";
 import Magnet from "@/components/Magnet";
+import CircularGallery from "@/components/CircularGallery";
 
 const Container = ({ children }: { children: React.ReactNode }) => (
   <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -12,6 +16,8 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 );
 
 export default function HomePage() {
+  const { resolvedTheme } = useTheme();
+
   return (
     <main className="relative isolate min-h-screen overflow-hidden font-sans">
 
@@ -172,46 +178,34 @@ export default function HomePage() {
             />
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-            {[
-              { emoji: "🐱", name: "Cats",       count: 34, img: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=80" },
-              { emoji: "🐶", name: "Dogs",       count: 45, img: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" },
-              { emoji: "🦜", name: "Birds",      count: 21, img: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=600&q=80" },
-              { emoji: "🐟", name: "Fish",       count: 18, img: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=600&q=80" },
-              { emoji: "🐭", name: "Small Pets", count: 12, img: "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=600&q=80" },
-              { emoji: "🦁", name: "Wild Pets",  count: 9,  img: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=600&q=80" },
-            ].map((cat) => (
-              <Link
-                key={cat.name}
-                href={`/shop?category=${cat.name.toLowerCase().replace(" ", "-")}`}
-                className="group relative overflow-hidden rounded-2xl"
-                style={{ aspectRatio: "4/3" }}
-              >
-                {/* Background image */}
-                <Image
-                  src={cat.img}
-                  alt={cat.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  priority={cat.name === "Cats" || cat.name === "Dogs" || cat.name === "Birds"}
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+          {/* Interactive Circular Gallery */}
+          <div className="relative h-[600px] w-full overflow-hidden rounded-2xl">
+            <CircularGallery
+              items={[
+                { text: "Cats", image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=80" },
+                { text: "Dogs", image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" },
+                { text: "Birds", image: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=600&q=80" },
+                { text: "Fish", image: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=600&q=80" },
+                { text: "Small Pets", image: "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=600&q=80" },
+                { text: "Wild Pets", image: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=600&q=80" }
+              ]}
+              bend={3}
+              borderRadius={0.05}
+              scrollSpeed={2}
+              scrollEase={0.05}
+              textColor={resolvedTheme === "dark" ? "#F7FFF7" : "#1A535C"}
 
-                {/* Dark gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 text-center text-white">
-                  <span className="text-3xl">{cat.emoji}</span>
-                  <p className="mt-1 text-[1.15rem] font-semibold tracking-[-0.01em] text-white/90">
-                    {cat.name}
-                  </p>
-                  <p className="mt-0.5 text-[12px] font-normal text-white/70">
-                    {cat.count} pets available
-                  </p>
-                </div>
-              </Link>
-            ))}
+              onItemClick={(item) => {
+                // 1. Format the URL
+                const url = `/shop?category=${item.text.toLowerCase().replace(" ", "-")}`;
+                
+                // 2. Log it to the console so you can see it fire!
+                console.log("Canvas Clicked! Forcing navigation to:", url);
+                
+                // 3. Force the browser to navigate (bypassing the detached canvas state)
+                window.location.href = url;
+              }}
+            />
           </div>
         </Container>
       </section>
