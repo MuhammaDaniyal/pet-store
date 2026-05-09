@@ -156,7 +156,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     <div
       style={{
         width: '100%',
-        height: '100%',
+        minHeight: '100vh',
         position: 'relative'
       }}
       onClick={handleClick}
@@ -164,6 +164,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
       <canvas
         ref={canvasRef}
         style={{
+          zIndex: 9999,
           position: 'absolute',
           inset: 0,
           pointerEvents: 'none'

@@ -2,6 +2,16 @@ import "server-only";
 
 import mongoose from "mongoose";
 
+// Import all models to ensure they are registered
+import "./models/Category";
+import "./models/Product";
+import "./models/User";
+import "./models/Cart";
+import "./models/Order";
+import "./models/Review";
+import "./models/SignupVerification";
+import "./models/Coupon";
+
 type CachedMongoose = {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
