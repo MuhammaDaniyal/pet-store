@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
+import Magnet from "@/components/Magnet";
 
 export default function AboutPage() {
   return (
@@ -31,7 +32,7 @@ export default function AboutPage() {
             <em className="font-normal not-italic text-[#6A6860]">deeply.</em>
           </h1>
           <p className="max-w-sm text-[14px] leading-[1.85] text-secondary lg:text-right">
-            PetStore started from a simple frustration — finding quality
+            PetStore started from a simple frustration - finding quality
             pet products online was a mess. So we fixed it.
           </p>
         </div>
@@ -46,7 +47,7 @@ export default function AboutPage() {
       <section className="relative z-10 mx-auto max-w-6xl px-8 py-16 sm:px-12">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.6fr]">
 
-          {/* Left — sticky label */}
+          {/* Left - sticky label */}
           <div>
             <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted">
               Our story
@@ -75,12 +76,12 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Right — text body */}
+          {/* Right - text body */}
           <div className="space-y-6 text-[15px] leading-[1.85] text-secondary">
             <p>
               PetStore was founded by a group of pet owners who got tired of
               inconsistent quality, slow delivery, and stores that treated animals
-              like an afterthought. We wanted something better — a single place
+              like an afterthought. We wanted something better - a single place
               with products we'd actually trust for our own companions.
             </p>
             <p>
@@ -119,23 +120,27 @@ export default function AboutPage() {
             <p className="text-[18px] font-medium text-[#F5F4F0]" style={{ letterSpacing: "-0.01em" }}>
               Ready to find the perfect products?
             </p>
-            <p className="mt-1 text-[13px] text-muted">
+            <p className="mt-1 text-[13px] text-[#0A1618]">
               Join thousands of pet owners who trust PetStore.
             </p>
           </div>
           <div className="flex gap-3">
-            <Link
-              href="/shop"
-              className="rounded-full border border-[#3A3A3A] px-6 py-3 text-[13px] font-medium text-muted transition-colors hover:border-[#F5F4F0] hover:text-[#F5F4F0]"
-            >
-              Browse shop
-            </Link>
-            <Link
-              href="/sign-up"
-              className="rounded-full bg-background px-6 py-3 text-[13px] font-medium text-primary transition-colors hover:bg-surface"
-            >
-              Create account
-            </Link>
+            <Magnet padding={50} disabled={false} magnetStrength={10}>
+              <Link
+                href="/shop"
+                className="rounded-full border border-[#F5F4F0] mx-3 px-6 py-3 text-[13px] text-[#F5F4F0] font-medium transition-all duration-300 hover:bg-[#F5F4F0] hover:text-[#0A1618] hover:scale-[1.1]"
+                >
+                Browse shop
+              </Link>
+            </Magnet>
+            <Magnet padding={50} disabled={false} magnetStrength={10}>
+              <Link
+                href="/sign-up"
+                className="rounded-full bg-background mx-1 px-6 py-3 text-[13px] font-medium text-primary transition-all duration-200 hover:bg-surface hover:shadow-[0_0_15px_var(--accent)] hover:scale-[1.1]"
+              >
+                Create account
+              </Link>
+            </Magnet>
           </div>
         </div>
       </section>

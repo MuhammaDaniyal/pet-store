@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link";
-import Image from "next/image";
 import { useTheme } from "next-themes";
 import BlurText from "@/components/BlurText";
 import SplitText from "@/components/SplitText";
@@ -196,13 +195,8 @@ export default function HomePage() {
               textColor={resolvedTheme === "dark" ? "#F7FFF7" : "#1A535C"}
 
               onItemClick={(item) => {
-                // 1. Format the URL
                 const url = `/shop?category=${item.text.toLowerCase().replace(" ", "-")}`;
-                
-                // 2. Log it to the console so you can see it fire!
                 console.log("Canvas Clicked! Forcing navigation to:", url);
-                
-                // 3. Force the browser to navigate (bypassing the detached canvas state)
                 window.location.href = url;
               }}
             />
