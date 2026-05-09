@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
-import Magnet from "@/components/Magnet";
+import Magnet from "@/components/animations/Magnet";
 
 export default function AboutPage() {
   return (

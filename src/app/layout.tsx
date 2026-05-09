@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { ThemeProviderWrapper } from "@/components/ThemeProvider";
-import ClickSpark from "@/components/ClickSpark";
+import ClickSpark from "@/components/animations/ClickSpark";
 import ChatbotSidebarWrapper from "@/components/ChatbotSidebarWrapper";
 import { TopBar } from "@/components/TopBar";
 import "./globals.css";

@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import BlurText from "@/components/BlurText";
-import SplitText from "@/components/SplitText";
-import AnimatedContent from "@/components/AnimatedContent";
-import Magnet from "@/components/Magnet";
-import CircularGallery from "@/components/CircularGallery";
+import BlurText from "@/components/animations/BlurText";
+import SplitText from "@/components/animations/SplitText";
+import AnimatedContent from "@/components/animations/AnimatedContent";
+import Magnet from "@/components/animations/Magnet";
+import CircularGallery from "@/components/animations/CircularGallery";
 
 const Container = ({ children }: { children: React.ReactNode }) => (
   <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
