@@ -14,6 +14,24 @@ export type UserRecord = {
   createdAt: string;
 };
 
+export type AccountProfile = {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  createdAt: string;
+  phone: string | null;
+  isActive: boolean;
+  address: {
+    street: string | null;
+    city: string | null;
+    province: string | null;
+    postalCode: string | null;
+    country: string | null;
+  } | null;
+  wishlistCount: number;
+};
+
 export type CreateUserInput = {
   name: string;
   email: string;
@@ -51,6 +69,48 @@ export async function findUserById(id: string) {
     role: user.role as UserRole,
     createdAt: user.createdAt?.toISOString() ?? new Date().toISOString(),
   } satisfies UserRecord;
+}
+
+export async function findAccountProfileById(id: string) {
+  await connectToDatabase();
+
+  const user = await User.findById(id).select(
+    "name email role phone address isActive wishlist createdAt"
+  );
+
+  if (!user) {
+    return null;
+  }
+
+  const address = user.address as
+    | {
+        street?: string;
+        city?: string;
+        province?: string;
+        postalCode?: string;
+        country?: string;
+      }
+    | undefined;
+
+  return {
+    id: user._id.toString(),
+    name: user.name,
+    email: user.email,
+    role: user.role as UserRole,
+    createdAt: user.createdAt?.toISOString() ?? new Date().toISOString(),
+    phone: user.phone ?? null,
+    isActive: user.isActive ?? true,
+    address: address
+      ? {
+          street: address.street ?? null,
+          city: address.city ?? null,
+          province: address.province ?? null,
+          postalCode: address.postalCode ?? null,
+          country: address.country ?? null,
+        }
+      : null,
+    wishlistCount: Array.isArray(user.wishlist) ? user.wishlist.length : 0,
+  } satisfies AccountProfile;
 }
 
 export async function createUser(input: CreateUserInput) {
