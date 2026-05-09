@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { ThemeProviderWrapper } from "@/components/ThemeProvider";
 import ClickSpark from "@/components/ClickSpark";
+import ChatbotSidebarWrapper from "@/components/ChatbotSidebarWrapper";
 import { TopBar } from "@/components/TopBar";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -45,6 +46,7 @@ export default function RootLayout({
           >
             <TopBar />
             {children}
+            <ChatbotSidebarWrapper />
           </ClickSpark>
         </ThemeProviderWrapper>
       </body>
