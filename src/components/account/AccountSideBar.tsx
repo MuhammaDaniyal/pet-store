@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Heart, LayoutDashboard, Package, UserRound } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Heart, LayoutDashboard, Package, UserRound, LogOut, Loader2 } from "lucide-react";
 
 const sidebarLinks = [
     { href: "/account", label: "Dashboard", icon: LayoutDashboard },
@@ -13,6 +14,29 @@ const sidebarLinks = [
 
 const AccountSideBar = () => {
     const pathname = usePathname();
+    const router = useRouter();
+    
+    // 1. Add state to track if the logout process is running
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+    const handleLogout = async () => {
+        // 2. Set loading to true as soon as they click
+        setIsLoggingOut(true); 
+        
+        try {
+            await fetch("/api/logout", {
+                method: "POST",
+            });
+            
+            // 3. Redirect to sign-in page instead of home
+            router.push("/sign-in");
+            router.refresh(); 
+        } catch (error) {
+            console.error("Failed to sign out:", error);
+            // If it fails, let them click the button again
+            setIsLoggingOut(false); 
+        }
+    };
 
     return (
         <aside className="md:col-span-1 md:sticky md:top-6 h-fit">
@@ -48,6 +72,26 @@ const AccountSideBar = () => {
                             </Link>
                         );
                     })}
+
+                    {/* Subtle Divider */}
+                    <div className="my-4 h-px w-full bg-black/5 dark:bg-white/10" />
+
+                    {/* 4. Update the Logout Button */}
+                    <button 
+                        onClick={handleLogout}
+                        disabled={isLoggingOut}
+                        className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-colors text-red-600 hover:bg-red-50 hover:text-red-700 dark:text-red-400 dark:hover:bg-red-500/10 dark:hover:text-red-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {/* Show spinning loader if logging out, otherwise show standard LogOut icon */}
+                        {isLoggingOut ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                            <LogOut className="h-4 w-4" />
+                        )}
+                        
+                        {/* Change text dynamically */}
+                        {isLoggingOut ? "Logging out..." : "Sign out"}
+                    </button>
                 </nav>
             </div>
         </aside>
