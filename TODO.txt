@@ -1,0 +1,1 @@
+- Add CountUp from ReactBits to home page

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import BlurText from "@/components/BlurText";
+import SplitText from "@/components/SplitText";
 
 const Container = ({ children }: { children: React.ReactNode }) => (
   <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -140,9 +141,22 @@ export default function HomePage() {
       {/* CATEGORIES */}
       <section className="relative z-10 pb-20 sm:pb-24 lg:pb-28">
         <Container>
-          <h2 className="mb-10 text-center text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-tight tracking-[-0.03em] text-primary">
-            Explore Our Categories
-          </h2>
+          <div className="flex w-full justify-center">
+            <SplitText
+              tag="h2"
+              text="Explore Our Categories"
+              className="mb-10 text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-tight tracking-[-0.03em] text-primary"
+              delay={30}
+              duration={1}
+              ease="elastic.out(1, 0.3)"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+            />
+          </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
             {[
