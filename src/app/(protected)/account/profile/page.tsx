@@ -3,6 +3,7 @@ import { CalendarDays, Mail, MapPin, Phone, ShieldCheck, UserRound } from "lucid
 
 import { getCurrentUser } from "@/lib/auth-client";
 import { findAccountProfileById } from "@/lib/users";
+import ProfileEditor from "@/components/account/ProfileEditor";
 
 function formatAddress(
   address:
@@ -117,14 +118,18 @@ export default async function ProfilePage() {
           </div>
 
           <div className="rounded-[28px] border border-border bg-surface p-6 shadow-[0_16px_40px_rgba(26,83,92,0.05)]">
-            <div className="flex items-center gap-3">
-              <MapPin className="h-5 w-5 text-accent" />
-              <h2 className="text-xl font-semibold text-primary">Delivery address</h2>
+            <div className="flex items-center justify-between gap-3 mb-6">
+              <div className="flex items-center gap-3">
+                <MapPin className="h-5 w-5 text-accent" />
+                <h2 className="text-xl font-semibold text-primary">Edit profile</h2>
+              </div>
             </div>
 
-            <p className="mt-4 text-sm leading-relaxed text-secondary">
-              {formatAddress(profile?.address)}
-            </p>
+            <ProfileEditor
+              initialName={profile?.name ?? authUser?.name ?? ""}
+              initialPhone={profile?.phone ?? null}
+              initialAddress={profile?.address ?? null}
+            />
 
             <Link
               href="/account"
