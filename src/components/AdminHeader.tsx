@@ -14,6 +14,7 @@ export function AdminHeader() {
         {/* Navigation links on the right */}
         <nav className="flex items-center gap-6 text-sm font-medium">
           <Link href="/admin" className="text-primary/60 hover:text-primary transition-colors">Dashboard</Link>
+          <Link href="/admin/products" className="text-primary/60 hover:text-primary transition-colors">Products</Link>
           <Link href="/admin/vets" className="text-primary/60 hover:text-primary transition-colors">Vets</Link>
           <Link href="/admin/appointments" className="text-primary/60 hover:text-primary transition-colors">Appointments</Link>
           <Link href="/admin/profile" className="text-primary/60 hover:text-primary transition-colors">Profile</Link>
