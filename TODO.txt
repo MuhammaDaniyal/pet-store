@@ -1,2 +1,13 @@
 - Add CountUp from ReactBits to home page
 - Scroll Velocity / Marquee: a horizontal scrolling text strip between sections showing things like "Free Delivery · 600+ Products · Premium Brands · Trusted by 10,000+ Pet Owners ·"
+
+TODO:
+- show message that order checked out or something when we checkout order
+- no order history (check the DB) - use Order
+- Order status updates after 1 day each time until it is delivered
+--- Default: pending 
+--- When ordered: confirmed
+--- After 1 day: shipped
+--- After 2-4(random) days: delivered
+--- Can be canceled before being shipped
+--- Can't be canceled if status == delivered
