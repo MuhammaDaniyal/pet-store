@@ -23,6 +23,12 @@ type RegisterBody = {
     postalCode?: string;
     country?: string;
   };
+  specialization?: string;
+  experience?: number;
+  consultationFee?: number;
+  bio?: string;
+  availableDays?: string[];
+  timeSlots?: string[];
 };
 
 type RegisterResponse = {
@@ -60,6 +66,12 @@ export async function POST(request: Request) {
   const province = address.province?.trim() ?? "";
   const postalCode = address.postalCode?.trim() ?? "";
   const country = address.country?.trim() ?? "";
+  const specialization = body.specialization?.trim() ?? "";
+  const experience = body.experience;
+  const consultationFee = body.consultationFee;
+  const bio = body.bio?.trim() ?? "";
+  const availableDays = body.availableDays ?? [];
+  const timeSlots = body.timeSlots ?? [];
 
   const fieldErrors: Record<string, string> = {};
 
@@ -96,6 +108,26 @@ export async function POST(request: Request) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     fieldErrors.email = "Enter a valid email address.";
+  }
+
+  if (role === "vet") {
+    if (!specialization) fieldErrors.specialization = "Specialization is required.";
+    if (typeof experience !== "number" || experience < 0) fieldErrors.experience = "Valid experience is required.";
+    if (typeof consultationFee !== "number" || consultationFee < 0) fieldErrors.consultationFee = "Valid consultation fee is required.";
+    if (!bio) fieldErrors.bio = "Professional bio is required.";
+
+    if (!Array.isArray(availableDays) || availableDays.length === 0) {
+      fieldErrors.availableDays = "Please select at least one available day.";
+    }
+    
+    if (!Array.isArray(timeSlots) || timeSlots.length === 0) {
+      fieldErrors.timeSlots = "Please enter valid time slots.";
+    } else {
+      const invalidSlot = timeSlots.find(slot => !/^([01]\d|2[0-3]):([0-5]\d)$/.test(slot));
+      if (invalidSlot) {
+        fieldErrors.timeSlots = `Invalid format (${invalidSlot}). Please use HH:MM format in 24h (e.g. 09:00).`;
+      }
+    }
   }
 
   if (Object.keys(fieldErrors).length > 0) {
@@ -154,6 +186,14 @@ export async function POST(request: Request) {
       country,
     },
     role,
+    ...(role === "vet" && {
+      specialization,
+      experience,
+      consultationFee,
+      bio,
+      availableDays,
+      timeSlots,
+    }),
   });
 
   try {

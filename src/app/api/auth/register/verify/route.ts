@@ -71,7 +71,16 @@ export async function POST(request: Request) {
   });
 
   if (signup.role === "vet") {
-    await Vet.create({ user: user.id, isVerified: false });
+    await Vet.create({
+      user: user.id,
+      isVerified: false,
+      specialization: signup.specialization,
+      experience: signup.experience,
+      consultationFee: signup.consultationFee,
+      bio: signup.bio,
+      availableDays: signup.availableDays,
+      timeSlots: signup.timeSlots,
+    });
   }
 
   const response = NextResponse.json({

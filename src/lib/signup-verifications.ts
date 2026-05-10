@@ -25,6 +25,12 @@ export type CreateSignupVerificationInput = {
   phone: string;
   address: SignupAddress;
   role: "user" | "vet";
+  specialization?: string;
+  experience?: number;
+  consultationFee?: number;
+  bio?: string;
+  availableDays?: string[];
+  timeSlots?: string[];
 };
 
 export type VerificationCheckResult =
@@ -71,6 +77,12 @@ export async function createSignupVerification(input: CreateSignupVerificationIn
     phone: input.phone,
     address: input.address,
     role: input.role,
+    specialization: input.specialization,
+    experience: input.experience,
+    consultationFee: input.consultationFee,
+    bio: input.bio,
+    availableDays: input.availableDays,
+    timeSlots: input.timeSlots,
     codeHash,
     attempts: 0,
     expiresAt,
@@ -124,6 +136,12 @@ export async function verifySignupVerificationCode(
     phone: pending.phone,
     address: pending.address,
     role: pending.role,
+    specialization: pending.specialization,
+    experience: pending.experience,
+    consultationFee: pending.consultationFee,
+    bio: pending.bio,
+    availableDays: pending.availableDays,
+    timeSlots: pending.timeSlots,
   } satisfies CreateSignupVerificationInput;
 
   await pending.deleteOne();
