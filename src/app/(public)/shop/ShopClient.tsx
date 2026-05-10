@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Heart, AlertTriangle, LayoutGrid, ListTree, ShoppingCart, Loader2, ArrowUpDown } from "lucide-react";
+import { Heart, AlertTriangle, LayoutGrid, ListTree, ShoppingCart, Loader2, ArrowUpDown, SlidersHorizontal } from "lucide-react";
 import Image from "next/image";
 import { SortPanel } from "@/components/shop/SortPanel";
+import { FilterPanel, type FilterState } from "@/components/shop/FilterPanel";
 
 type CategoryItem = {
   _id: string;
@@ -33,9 +34,13 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
   const [loadingWishlist, setLoadingWishlist] = useState<string | null>(null);
 
   const [isSortExpanded, setIsSortExpanded] = useState(false);
-  const [sortBy, setSortBy] = useState("name-asc");
+  const [sortBy, setSortBy] = useState("none");
+
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filters, setFilters] = useState<FilterState>({ categories: [], prices: [] });
 
   const sortProducts = (products: ProductItem[]) => {
+    if (sortBy === "none") return products;
     return [...products].sort((a, b) => {
       switch (sortBy) {
         case "price-low":
@@ -52,8 +57,34 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
     });
   };
 
+  const getFilteredAndSortedProducts = () => {
+    let result = [...initialProducts];
+
+    // Filter by Category
+    if (filters.categories.length > 0) {
+      result = result.filter((p) => filters.categories.includes(p.category.name));
+    }
+
+    // Filter by Price
+    if (filters.prices.length > 0) {
+      result = result.filter((p) => {
+        return filters.prices.some((priceRange) => {
+          if (priceRange === "under-50") return p.price < 5000;
+          if (priceRange === "50-200") return p.price >= 5000 && p.price <= 20000;
+          if (priceRange === "200-800") return p.price > 20000 && p.price <= 80000;
+          if (priceRange === "over-800") return p.price > 80000;
+          return false;
+        });
+      });
+    }
+
+    return sortProducts(result);
+  };
+
+  const filteredAndSortedProducts = getFilteredAndSortedProducts();
+
   // Group products by category name
-  const groupedProducts = initialProducts.reduce((acc, product) => {
+  const groupedProducts = filteredAndSortedProducts.reduce((acc, product) => {
     const catName = product.category.name;
     if (!acc[catName]) acc[catName] = [];
     acc[catName].push(product);
@@ -222,6 +253,14 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
         
         <div className="flex items-center gap-3">
           <button
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+            className="flex items-center gap-2 rounded-full border border-primary/20 bg-background px-5 py-2.5 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-primary/5 dark:border-primary/30 dark:hover:bg-primary/10"
+          >
+            <SlidersHorizontal className="h-4 w-4" />
+            Filters
+          </button>
+
+          <button
             onClick={() => setIsSortExpanded(!isSortExpanded)}
             className="flex items-center gap-2 rounded-full border border-primary/20 bg-background px-5 py-2.5 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-primary/5 dark:border-primary/30 dark:hover:bg-primary/10"
           >
@@ -254,6 +293,13 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
         isExpanded={isSortExpanded}
       />
 
+      <FilterPanel
+        isOpen={isFilterOpen}
+        onClose={() => setIsFilterOpen(false)}
+        filters={filters}
+        setFilters={setFilters}
+      />
+
       {/* RENDER LOGIC */}
       {isGrouped ? (
         <div className="space-y-16">
@@ -277,7 +323,7 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
 
               {/* Category Grid */}
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {sortProducts(items).map((p) => (
+                {items.map((p) => (
                   <ProductCard key={p._id} p={p} />
                 ))}
               </div>
@@ -287,7 +333,7 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
       ) : (
         /* Flat Grid View */
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {sortProducts(initialProducts).map((p) => (
+          {filteredAndSortedProducts.map((p) => (
             <ProductCard key={p._id} p={p} />
           ))}
         </div>

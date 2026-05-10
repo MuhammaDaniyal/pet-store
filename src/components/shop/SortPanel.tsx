@@ -15,7 +15,22 @@ export function SortPanel({ sortBy, setSortBy, isExpanded }: SortPanelProps) {
     <div className="mb-6 rounded-2xl border border-border bg-surface p-5 shadow-sm dark:bg-background/50">
       <h4 className="mb-4 text-lg font-semibold text-primary font-serif">Sort Products</h4>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {/* Reset Sort */}
+        <div className="space-y-2">
+          <label className="flex items-center gap-3 cursor-pointer rounded-lg p-2 transition-colors hover:bg-accent/10">
+            <input
+              type="radio"
+              name="sort"
+              value="none"
+              checked={sortBy === "none"}
+              onChange={() => setSortBy("none")}
+              className="h-4 w-4 text-accent accent-accent"
+            />
+            <span className="text-sm font-medium text-primary">None (Default)</span>
+          </label>
+        </div>
+
         {/* Price Sort */}
         <div className="space-y-2">
           <label className="flex items-center gap-3 cursor-pointer rounded-lg p-2 transition-colors hover:bg-accent/10">
