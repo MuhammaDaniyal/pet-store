@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { Loader2, CheckCircle2, XCircle, Stethoscope } from "lucide-react";
 
 type AppointmentStatus = "pending" | "confirmed" | "completed" | "cancelled";
@@ -34,12 +34,13 @@ function AppointmentRow({
   initialStatus,
 }: AppointmentRowProps) {
   const [status, setStatus] = useState<AppointmentStatus>(initialStatus);
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState("");
 
   async function updateStatus(newStatus: AppointmentStatus) {
     setError("");
-    startTransition(async () => {
+    setIsPending(true);
+    try {
       const res = await fetch(`/api/vet/appointments/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -51,7 +52,11 @@ function AppointmentRow({
         const data = (await res.json()) as { message?: string };
         setError(data.message ?? "Update failed.");
       }
-    });
+    } catch (err) {
+      setError("Network error. Please try again.");
+    } finally {
+      setIsPending(false);
+    }
   }
 
   return (

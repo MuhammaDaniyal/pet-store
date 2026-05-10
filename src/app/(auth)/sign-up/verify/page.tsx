@@ -42,7 +42,7 @@ function VerifyForm() {
         return;
       }
 
-      router.replace(data.role === "admin" ? "/admin/dashboard" : "/");
+      router.replace(data.role === "admin" ? "/admin" : "/");
     } catch {
       setError("Unable to verify account. Please try again.");
     } finally {

@@ -21,7 +21,7 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (pathname.startsWith("/admin") && payload.role === "user") {
+  if (pathname.startsWith("/admin") && payload.role !== "admin") {
     return NextResponse.redirect(new URL("/", request.url));
   }
 

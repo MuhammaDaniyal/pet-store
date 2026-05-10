@@ -17,6 +17,7 @@ export function ClientNav({ user }: ClientNavProps) {
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
     { name: "Shop", href: "/shop" },
+    { name: "Vet Clinic", href: "/vets" },
   ];
 
   return (

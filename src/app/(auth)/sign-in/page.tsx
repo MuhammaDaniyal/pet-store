@@ -39,7 +39,7 @@ export default function SignInPage() {
 
       router.replace(
         data.role === "admin" ?
-          "/admin/dashboard" :
+          "/admin" :
           data.role === "vet" ?
             "/vet/dashboard" :
             "/"
