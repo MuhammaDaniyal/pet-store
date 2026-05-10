@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type LoginResponse = {
-  role?: "user" | "admin";
+  role?: "user" | "admin" | "vet";
   message?: string;
 };
 
@@ -37,7 +37,13 @@ export default function SignInPage() {
         return;
       }
 
-      router.replace(data.role === "admin" ? "/admin/dashboard" : "/");
+      router.replace(
+        data.role === "admin" ?
+          "/admin/dashboard" :
+          data.role === "vet" ?
+            "/vet/dashboard" :
+            "/"
+      );
     } catch {
       setError("Unable to sign in. Please try again.");
     } finally {

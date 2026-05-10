@@ -17,6 +17,10 @@ export function proxy(request: NextRequest) {
     return response;
   }
 
+  if (pathname.startsWith("/vet") && payload.role !== "vet" && payload.role !== "admin") {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   if (pathname.startsWith("/admin") && payload.role === "user") {
     return NextResponse.redirect(new URL("/", request.url));
   }
@@ -25,5 +29,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/account/:path*", "/cart", "/checkout", "/admin/:path*"],
+  matcher: ["/account/:path*", "/cart", "/checkout", "/admin/:path*", "/vet/:path*"],
 };

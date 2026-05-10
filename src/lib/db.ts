@@ -11,6 +11,8 @@ import "./models/Order";
 import "./models/Review";
 import "./models/SignupVerification";
 import "./models/Coupon";
+import "./models/Vet";
+import "./models/Appointment";
 
 type CachedMongoose = {
   conn: typeof mongoose | null;

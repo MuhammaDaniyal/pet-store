@@ -7,7 +7,7 @@ export type AuthTokenPayload = {
   userId: string;
   name: string;
   email: string;
-  role: "user" | "admin";
+  role: "user" | "admin" | "vet";
 };
 
 function getJwtSecret() {
@@ -46,7 +46,7 @@ export function verifyToken(token: string) {
       typeof payload.userId !== "string" ||
       typeof payload.name !== "string" ||
       typeof payload.email !== "string" ||
-      (payload.role !== "user" && payload.role !== "admin")
+      (payload.role !== "user" && payload.role !== "admin" && payload.role !== "vet")
     ) {
       return null;
     }

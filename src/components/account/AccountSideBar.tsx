@@ -3,12 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Heart, LayoutDashboard, Package, UserRound, LogOut, Loader2 } from "lucide-react";
+import { Heart, LayoutDashboard, Package, UserRound, LogOut, Loader2, CalendarDays } from "lucide-react";
 
 const sidebarLinks = [
     { href: "/account", label: "Dashboard", icon: LayoutDashboard },
     { href: "/account/profile", label: "Profile", icon: UserRound },
     { href: "/account/orders", label: "Orders", icon: Package },
+    { href: "/account/appointments", label: "Appointments", icon: CalendarDays },
     { href: "/account/wishlist", label: "Wishlist", icon: Heart },
 ];
 
