@@ -3,6 +3,8 @@ import { Stethoscope, Star, Clock, ArrowRight, CalendarDays } from "lucide-react
 import { connectToDatabase } from "@/lib/db";
 import { User } from "@/lib/models/User";
 import { Vet } from "@/lib/models/Vet";
+import { getCurrentUser } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 interface VetProfile {
   _id: string;
@@ -22,6 +24,11 @@ export const metadata = {
 };
 
 export default async function VetsPage() {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) {
+    redirect("/sign-in");
+  }
+
   await connectToDatabase();
 
   // Get all users with role "vet"

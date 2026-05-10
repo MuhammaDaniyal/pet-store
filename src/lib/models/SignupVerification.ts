@@ -13,6 +13,7 @@ const SignupVerificationSchema = new Schema(
       postalCode: { type: String, required: true },
       country: { type: String, required: true },
     },
+    role: { type: String, enum: ["user", "vet"], default: "user", required: true },
     codeHash: { type: String, required: true },
     attempts: { type: Number, default: 0 },
     expiresAt: { type: Date, required: true },
@@ -22,5 +23,8 @@ const SignupVerificationSchema = new Schema(
 
 SignupVerificationSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
-export const SignupVerification =
-  models.SignupVerification || model("SignupVerification", SignupVerificationSchema);
+if (models.SignupVerification) {
+  delete models.SignupVerification;
+}
+
+export const SignupVerification = model("SignupVerification", SignupVerificationSchema);

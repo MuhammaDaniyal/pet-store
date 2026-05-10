@@ -24,6 +24,7 @@ export type CreateSignupVerificationInput = {
   password: string;
   phone: string;
   address: SignupAddress;
+  role: "user" | "vet";
 };
 
 export type VerificationCheckResult =
@@ -69,6 +70,7 @@ export async function createSignupVerification(input: CreateSignupVerificationIn
     password: input.password,
     phone: input.phone,
     address: input.address,
+    role: input.role,
     codeHash,
     attempts: 0,
     expiresAt,
@@ -121,6 +123,7 @@ export async function verifySignupVerificationCode(
     password: pending.password,
     phone: pending.phone,
     address: pending.address,
+    role: pending.role,
   } satisfies CreateSignupVerificationInput;
 
   await pending.deleteOne();

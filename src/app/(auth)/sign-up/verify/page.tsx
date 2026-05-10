@@ -20,6 +20,7 @@ function VerifyForm() {
   const [code, setCode] = useState(searchParams.get("code") ?? "");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isVetPending, setIsVetPending] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -42,12 +43,36 @@ function VerifyForm() {
         return;
       }
 
+      if (data.role === "vet") {
+        setIsVetPending(true);
+        return;
+      }
+
       router.replace(data.role === "admin" ? "/admin" : "/");
     } catch {
       setError("Unable to verify account. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  if (isVetPending) {
+    return (
+      <section className="w-full max-w-md rounded-lg border border-border bg-surface p-10 text-center">
+        <div className="space-y-4">
+          <h1 className="text-2xl font-medium text-primary">Registration Complete!</h1>
+          <p className="text-secondary">
+            Your email has been verified! Since you applied as a Veterinarian, your account is currently pending admin approval. You will receive an email once your account has been verified.
+          </p>
+          <Link
+            href="/"
+            className="inline-block mt-4 rounded-md bg-accent px-6 py-3 text-sm font-medium text-[#F5F4F0] transition-colors hover:bg-accent-hover"
+          >
+            Return to Homepage
+          </Link>
+        </div>
+      </section>
+    );
   }
 
   return (

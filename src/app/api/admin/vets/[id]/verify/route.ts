@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth-client";
 import { connectToDatabase } from "@/lib/db";
 import { Vet } from "@/lib/models/Vet";
+import { sendVetWelcomeEmail } from "@/lib/email";
+import { User } from "@/lib/models/User";
 
 export const runtime = "nodejs";
 
@@ -28,10 +30,19 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
       id,
       { isVerified },
       { new: true, runValidators: true }
-    );
+    ).populate("user");
 
     if (!vet) {
       return NextResponse.json({ message: "Vet not found." }, { status: 404 });
+    }
+
+    // Only send the email if the account is being verified (not un-verified)
+    if (isVerified && vet.user) {
+      try {
+        await sendVetWelcomeEmail(vet.user.name, vet.user.email);
+      } catch (err) {
+        console.error("Failed to send vet welcome email:", err);
+      }
     }
 
     return NextResponse.json(

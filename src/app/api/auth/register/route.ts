@@ -15,6 +15,7 @@ type RegisterBody = {
   password?: string;
   confirmPassword?: string;
   phone?: string;
+  role?: string;
   address?: {
     street?: string;
     city?: string;
@@ -52,6 +53,7 @@ export async function POST(request: Request) {
   const password = body.password ?? "";
   const confirmPassword = body.confirmPassword ?? "";
   const phone = body.phone?.trim() ?? "";
+  const role = body.role === "vet" ? "vet" : "user";
   const address = body.address ?? {};
   const street = address.street?.trim() ?? "";
   const city = address.city?.trim() ?? "";
@@ -151,6 +153,7 @@ export async function POST(request: Request) {
       postalCode,
       country,
     },
+    role,
   });
 
   try {

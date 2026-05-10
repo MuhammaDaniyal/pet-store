@@ -25,7 +25,7 @@ const AccountSideBar = () => {
         setIsLoggingOut(true); 
         
         try {
-            await fetch("/api/logout", {
+            await fetch("/api/auth/logout", {
                 method: "POST",
             });
             

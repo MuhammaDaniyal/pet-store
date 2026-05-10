@@ -3,7 +3,7 @@ import "server-only";
 import { connectToDatabase } from "./db";
 import { User } from "./models/User";
 
-export type UserRole = "user" | "admin";
+export type UserRole = "user" | "admin" | "vet";
 
 export type UserRecord = {
   id: string;

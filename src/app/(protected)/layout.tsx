@@ -15,6 +15,12 @@ export default async function ProtectedLayout({
     redirect("/sign-in");
   }
 
+  if (user.role !== "user") {
+    if (user.role === "admin") redirect("/admin");
+    if (user.role === "vet") redirect("/vet/dashboard");
+    redirect("/");
+  }
+
   return (
     <>
       <PublicHeader />

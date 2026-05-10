@@ -1,6 +1,8 @@
 import { comparePassword, signToken } from "@/lib/auth";
 import { findUserByEmail } from "@/lib/users";
 import { NextResponse } from "next/server";
+import { connectToDatabase } from "@/lib/db";
+import { Vet } from "@/lib/models/Vet";
 
 export const runtime = "nodejs";
 
@@ -39,6 +41,14 @@ export async function POST(request: Request) {
 
   if (!passwordMatches) {
     return errorResponse("Invalid email or password.", 401);
+  }
+
+  if (user.role === "vet") {
+    await connectToDatabase();
+    const vet = await Vet.findOne({ user: user.id });
+    if (vet && vet.isVerified === false) {
+      return errorResponse("Your account is still pending admin verification.", 403);
+    }
   }
 
   const token = signToken({

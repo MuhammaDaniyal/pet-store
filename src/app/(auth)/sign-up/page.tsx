@@ -37,6 +37,7 @@ export default function SignUpPage() {
   const [province, setProvince] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
+  const [role, setRole] = useState("user");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -98,6 +99,7 @@ export default function SignUpPage() {
           password,
           confirmPassword,
           phone: phoneNumber,
+          role,
           address: {
             street,
             city,
@@ -141,6 +143,22 @@ export default function SignUpPage() {
       </div>
 
       <form className="mt-8 grid gap-5 sm:grid-cols-2" onSubmit={handleSubmit} noValidate>
+        <div className="space-y-2 sm:col-span-2">
+          <label htmlFor="role" className="text-sm font-medium text-primary">
+            Account Type
+          </label>
+          <select
+            id="role"
+            name="role"
+            value={role}
+            onChange={(event) => setRole(event.target.value)}
+            className="w-full rounded-sm border border-border bg-surface px-4 py-3 text-primary focus:border-[#0A0A0A] focus:outline-none appearance-none"
+          >
+            <option value="user">Pet Owner</option>
+            <option value="vet">Veterinarian</option>
+          </select>
+        </div>
+
         <div className="space-y-2">
           <label htmlFor="name" className="text-sm font-medium text-primary">
             Full name

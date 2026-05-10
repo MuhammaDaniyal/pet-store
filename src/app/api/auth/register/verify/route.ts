@@ -1,7 +1,8 @@
 import { signToken } from "@/lib/auth";
-import { createUser, findUserByEmail } from "@/lib/users";
+import { createUser, findUserByEmail, UserRole } from "@/lib/users";
 import { verifySignupVerificationCode } from "@/lib/signup-verifications";
 import { NextResponse } from "next/server";
+import { Vet } from "@/lib/models/Vet";
 
 export const runtime = "nodejs";
 
@@ -66,30 +67,37 @@ export async function POST(request: Request) {
     password: signup.password,
     phone: signup.phone,
     address: signup.address,
-    role: "user",
+    role: signup.role as UserRole,
   });
 
-  const token = signToken({
-    userId: user.id,
-    name: user.name,
-    email: user.email,
-    role: user.role,
-  });
+  if (signup.role === "vet") {
+    await Vet.create({ user: user.id, isVerified: false });
+  }
 
   const response = NextResponse.json({
     message: "Account verified and created successfully.",
     role: user.role,
   });
 
-  response.cookies.set({
-    name: "token",
-    value: token,
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 7,
-  });
+  // Only log in the user automatically if they are not a vet pending approval
+  if (signup.role !== "vet") {
+    const token = signToken({
+      userId: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    });
+
+    response.cookies.set({
+      name: "token",
+      value: token,
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7,
+    });
+  }
 
   return response;
 }

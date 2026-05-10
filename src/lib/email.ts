@@ -92,3 +92,45 @@ export async function sendVerificationEmail(
 
   return {};
 }
+
+export async function sendVetWelcomeEmail(
+  name: string,
+  email: string,
+) {
+  const transporter = getTransporter();
+
+  if (!transporter) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn("SMTP is not configured. Simulating sending Vet welcome email.");
+      return;
+    }
+
+    throw new Error("SMTP configuration is missing. Set SMTP_URL or SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS.");
+  }
+
+  const subject = "Your Vet Account has been Verified!";
+  const text = [
+    `Hi ${name},`,
+    "",
+    `Your Veterinarian account at PetStore has been verified by our admins!`,
+    "",
+    `You can now log in to manage your dashboard and appointments.`,
+    "",
+    `Welcome to the platform!`,
+  ].join("\n");
+
+  await transporter.sendMail({
+    from: getFromAddress(),
+    to: email,
+    subject,
+    text,
+    html: `
+      <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0A0A0A">
+        <p>Hi ${name},</p>
+        <p>Your Veterinarian account at PetStore has been verified by our admins!</p>
+        <p>You can now log in to manage your dashboard and appointments.</p>
+        <p>Welcome to the platform!</p>
+      </div>
+    `,
+  });
+}
