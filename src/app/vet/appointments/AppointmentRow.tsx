@@ -8,7 +8,8 @@ type AppointmentStatus = "pending" | "confirmed" | "completed" | "cancelled";
 interface AppointmentRowProps {
   id: string;
   clientName: string;
-  pet: string;
+  petName: string;
+  petDescription?: string;
   type: string;
   date: string;
   timeSlot: string;
@@ -25,7 +26,8 @@ const STATUS_STYLES: Record<AppointmentStatus, string> = {
 function AppointmentRow({
   id,
   clientName,
-  pet,
+  petName,
+  petDescription,
   type,
   date,
   timeSlot,
@@ -61,9 +63,11 @@ function AppointmentRow({
         </div>
         <div>
           <p className="text-sm font-semibold text-primary">{clientName}</p>
-          <p className="mt-0.5 text-xs text-secondary capitalize">
-            {type} · {pet}
-          </p>
+          <p className="mt-0.5 text-xs text-secondary capitalize">{type}</p>
+          <p className="text-xs font-medium text-primary">{petName}</p>
+          {petDescription && (
+            <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{petDescription}</p>
+          )}
         </div>
       </div>
 

@@ -8,7 +8,8 @@ import AppointmentRow from "./AppointmentRow";
 interface AppointmentDoc {
   _id: { toString(): string };
   user: { _id: { toString(): string }; name?: string; email?: string } | null;
-  pet: string;
+  petName: string;
+  petDescription?: string;
   date: Date | string;
   timeSlot: string;
   type: "consultation" | "grooming" | "checkup";
@@ -68,7 +69,8 @@ export default async function VetAppointmentsPage() {
                 key={appt._id.toString()}
                 id={appt._id.toString()}
                 clientName={appt.user?.name ?? appt.user?.email ?? "Unknown client"}
-                pet={appt.pet}
+                petName={appt.petName}
+                petDescription={appt.petDescription}
                 type={appt.type}
                 date={apptDate}
                 timeSlot={appt.timeSlot}

@@ -15,7 +15,7 @@ const SignupVerificationSchema = new Schema(
     },
     codeHash: { type: String, required: true },
     attempts: { type: Number, default: 0 },
-    expiresAt: { type: Date, required: true, index: true },
+    expiresAt: { type: Date, required: true },
   },
   { timestamps: true },
 );

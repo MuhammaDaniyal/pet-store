@@ -8,7 +8,8 @@ import { Appointment } from "@/lib/models/Appointment";
 interface AppointmentDoc {
   _id: { toString(): string };
   user: { name?: string; email?: string } | null;
-  pet: string;
+  petName: string;
+  petDescription?: string;
   date: Date | string;
   timeSlot: string;
   type: "consultation" | "grooming" | "checkup";
@@ -158,8 +159,13 @@ export default async function VetDashboardPage() {
                       {appt.user?.name ?? "Unknown client"}
                     </p>
                     <p className="text-xs text-secondary capitalize">
-                      {appt.type} · Pet: {appt.pet}
+                      {appt.type} · {appt.petName}
                     </p>
+                    {appt.petDescription && (
+                      <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">
+                        {appt.petDescription}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <span className="shrink-0 rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700 border border-sky-200">

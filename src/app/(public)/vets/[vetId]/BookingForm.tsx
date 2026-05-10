@@ -17,7 +17,8 @@ export default function BookingForm({ vetId, timeSlots, consultationFee }: Booki
   const [success, setSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
-    pet: "",
+    petName: "",
+    petDescription: "",
     type: "consultation" as "consultation" | "grooming" | "checkup",
     date: "",
     timeSlot: timeSlots[0] ?? "",
@@ -78,16 +79,33 @@ export default function BookingForm({ vetId, timeSlots, consultationFee }: Booki
     <form onSubmit={handleSubmit} className="space-y-5">
       {/* Pet Name */}
       <div className="space-y-1.5">
-        <label htmlFor="pet" className="block text-sm font-medium text-primary">
-          Pet Name / Description
+        <label htmlFor="petName" className="block text-sm font-medium text-primary">
+          Pet Name
         </label>
         <input
-          id="pet"
-          name="pet"
+          id="petName"
+          name="petName"
           type="text"
           required
-          placeholder="e.g. Max, Golden Retriever"
-          value={formData.pet}
+          placeholder="e.g. Fluffy"
+          value={formData.petName}
+          onChange={handleChange}
+          className="w-full rounded-xl border border-border bg-background/60 px-4 py-3 text-sm text-primary placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+        />
+      </div>
+
+      {/* Pet Description */}
+      <div className="space-y-1.5">
+        <label htmlFor="petDescription" className="block text-sm font-medium text-primary">
+          Pet Description
+        </label>
+        <input
+          id="petDescription"
+          name="petDescription"
+          type="text"
+          required
+          placeholder="e.g. Persian Cat, 3 years old, not eating well"
+          value={formData.petDescription}
           onChange={handleChange}
           className="w-full rounded-xl border border-border bg-background/60 px-4 py-3 text-sm text-primary placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
         />

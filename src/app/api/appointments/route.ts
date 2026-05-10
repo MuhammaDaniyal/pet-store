@@ -8,7 +8,8 @@ export const runtime = "nodejs";
 
 interface AppointmentBody {
   vetId?: string;
-  pet?: string;
+  petName?: string;
+  petDescription?: string;
   date?: string;
   timeSlot?: string;
   type?: string;
@@ -24,10 +25,10 @@ export async function POST(request: Request) {
     }
 
     const body = (await request.json()) as AppointmentBody;
-    const { vetId, pet, date, timeSlot, type, fee } = body;
+    const { vetId, petName, petDescription, date, timeSlot, type, fee } = body;
 
     // Validate required fields
-    if (!vetId || !pet || !date || !timeSlot || !type) {
+    if (!vetId || !petName || !petDescription || !date || !timeSlot || !type) {
       return NextResponse.json(
         { message: "Please provide all required fields." },
         { status: 400 }
@@ -65,7 +66,8 @@ export async function POST(request: Request) {
     const appointment = await Appointment.create({
       user: user.userId,
       vet: vetId,
-      pet,
+      petName,
+      petDescription,
       date: new Date(date),
       timeSlot,
       type,

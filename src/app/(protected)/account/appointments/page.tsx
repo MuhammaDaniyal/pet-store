@@ -14,7 +14,8 @@ interface PopulatedVet {
 interface AppointmentDoc {
   _id: { toString(): string };
   vet: PopulatedVet;
-  pet: string;
+  petName: string;
+  petDescription?: string;
   date: Date | string;
   timeSlot: string;
   type: "consultation" | "grooming" | "checkup";
@@ -141,7 +142,10 @@ export default async function AppointmentsPage() {
                   </div>
                   <div>
                     <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">Pet</p>
-                    <p className="mt-0.5 text-sm font-medium text-primary">{appt.pet}</p>
+                    <p className="mt-0.5 text-sm font-medium text-primary">{appt.petName}</p>
+                    {appt.petDescription && (
+                      <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{appt.petDescription}</p>
+                    )}
                   </div>
                   <div>
                     <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">Type</p>
