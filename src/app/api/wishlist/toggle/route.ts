@@ -47,7 +47,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "User not found." }, { status: 404 });
     }
 
-    const wishlisted = currentUser.wishlist.some((item) => item.toString() === productId);
+    const wishlisted = currentUser.wishlist.some((item: any) => item.toString() === productId);
 
     if (wishlisted) {
       await User.updateOne({ _id: user.userId }, { $pull: { wishlist: productId } });

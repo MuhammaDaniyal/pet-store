@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState, Suspense } from "react";
 
 type VerifyResponse = {
-  role?: "user" | "admin";
+  role?: "user" | "admin" | "vet";
   message?: string;
   fieldErrors?: {
     email?: string;
