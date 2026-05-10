@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Heart, AlertTriangle, LayoutGrid, ListTree, ShoppingCart, Loader2 } from "lucide-react";
+import { Heart, AlertTriangle, LayoutGrid, ListTree, ShoppingCart, Loader2, ArrowUpDown } from "lucide-react";
 import Image from "next/image";
+import { SortPanel } from "@/components/shop/SortPanel";
 
 type CategoryItem = {
   _id: string;
@@ -30,6 +31,26 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
   const [wishlistedIds, setWishlistedIds] = useState<Set<string>>(new Set());
   const [loadingCart, setLoadingCart] = useState<string | null>(null);
   const [loadingWishlist, setLoadingWishlist] = useState<string | null>(null);
+
+  const [isSortExpanded, setIsSortExpanded] = useState(false);
+  const [sortBy, setSortBy] = useState("name-asc");
+
+  const sortProducts = (products: ProductItem[]) => {
+    return [...products].sort((a, b) => {
+      switch (sortBy) {
+        case "price-low":
+          return a.price - b.price;
+        case "price-high":
+          return b.price - a.price;
+        case "name-asc":
+          return a.name.localeCompare(b.name);
+        case "name-desc":
+          return b.name.localeCompare(a.name);
+        default:
+          return 0;
+      }
+    });
+  };
 
   // Group products by category name
   const groupedProducts = initialProducts.reduce((acc, product) => {
@@ -199,23 +220,39 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
       <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <h1 className="text-4xl font-bold font-serif text-primary">Shop</h1>
         
-        <button
-          onClick={() => setIsGrouped(!isGrouped)}
-          className="flex items-center gap-2 rounded-full border border-primary/20 bg-background px-5 py-2.5 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-primary/5 dark:border-primary/30 dark:hover:bg-primary/10"
-        >
-          {isGrouped ? (
-            <>
-              <LayoutGrid className="h-4 w-4" />
-              View All Pets
-            </>
-          ) : (
-            <>
-              <ListTree className="h-4 w-4" />
-              Group by Category
-            </>
-          )}
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setIsSortExpanded(!isSortExpanded)}
+            className="flex items-center gap-2 rounded-full border border-primary/20 bg-background px-5 py-2.5 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-primary/5 dark:border-primary/30 dark:hover:bg-primary/10"
+          >
+            <ArrowUpDown className="h-4 w-4" />
+            Sort
+          </button>
+
+          <button
+            onClick={() => setIsGrouped(!isGrouped)}
+            className="flex items-center gap-2 rounded-full border border-primary/20 bg-background px-5 py-2.5 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-primary/5 dark:border-primary/30 dark:hover:bg-primary/10"
+          >
+            {isGrouped ? (
+              <>
+                <LayoutGrid className="h-4 w-4" />
+                View All Pets
+              </>
+            ) : (
+              <>
+                <ListTree className="h-4 w-4" />
+                Group by Category
+              </>
+            )}
+          </button>
+        </div>
       </div>
+
+      <SortPanel
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        isExpanded={isSortExpanded}
+      />
 
       {/* RENDER LOGIC */}
       {isGrouped ? (
@@ -240,7 +277,7 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
 
               {/* Category Grid */}
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {items.map((p) => (
+                {sortProducts(items).map((p) => (
                   <ProductCard key={p._id} p={p} />
                 ))}
               </div>
@@ -250,7 +287,7 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
       ) : (
         /* Flat Grid View */
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {initialProducts.map((p) => (
+          {sortProducts(initialProducts).map((p) => (
             <ProductCard key={p._id} p={p} />
           ))}
         </div>
