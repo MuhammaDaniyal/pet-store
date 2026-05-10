@@ -1,6 +1,6 @@
-export function formatMoney(amountInCents: number) {
+export function formatMoney(amountInDollars: number) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-  }).format(amountInCents / 100);
+  }).format(amountInDollars);
 }

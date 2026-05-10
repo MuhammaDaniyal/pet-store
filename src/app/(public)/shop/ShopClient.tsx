@@ -69,10 +69,10 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
     if (filters.prices.length > 0) {
       result = result.filter((p) => {
         return filters.prices.some((priceRange) => {
-          if (priceRange === "under-50") return p.price < 5000;
-          if (priceRange === "50-200") return p.price >= 5000 && p.price <= 20000;
-          if (priceRange === "200-800") return p.price > 20000 && p.price <= 80000;
-          if (priceRange === "over-800") return p.price > 80000;
+          if (priceRange === "under-50") return p.price < 50;
+          if (priceRange === "50-200") return p.price >= 50 && p.price <= 200;
+          if (priceRange === "200-800") return p.price > 200 && p.price <= 800;
+          if (priceRange === "over-800") return p.price > 800;
           return false;
         });
       });
@@ -100,18 +100,18 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productId, quantity: 1 }),
       });
-      
+
       if (res.status === 401) {
         window.location.href = "/login";
         return;
       }
-      
+
       if (!res.ok) {
         const data = await res.json();
         alert(data.message || "Failed to add to cart");
         return;
       }
-      
+
       alert("Added to cart!");
     } catch (error) {
       console.error("Add to cart error:", error);
@@ -130,18 +130,18 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productId }),
       });
-      
+
       if (res.status === 401) {
         window.location.href = "/login";
         return;
       }
-      
+
       if (!res.ok) {
         const data = await res.json();
         alert(data.message || "Failed to update wishlist");
         return;
       }
-      
+
       const data = await res.json();
       setWishlistedIds((prev) => {
         const newSet = new Set(prev);
@@ -162,7 +162,7 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
 
   // The individual Card Component
   const ProductCard = ({ p }: { p: ProductItem }) => {
-    const price = typeof p.price === "number" ? (p.price / 100).toFixed(2) : "0.00";
+    const price = typeof p.price === "number" ? p.price.toFixed(2) : "0.00";
     const isWishlisted = wishlistedIds.has(p._id);
     const isCartLoading = loadingCart === p._id;
     const isWishlistLoading = loadingWishlist === p._id;
@@ -170,7 +170,7 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
     return (
       <div className="h-full">
         <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/50 bg-card text-card-foreground transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:hover:shadow-primary/10">
-          
+
           {/* Image Header container */}
           <div className="relative h-56 w-full bg-muted/50">
             {p.images && p.images.length > 0 ? (
@@ -191,14 +191,13 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
                 Best Seller
               </span>
             )}
-            
+
             {/* Heart Icon */}
-            <button 
-              className={`absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full transition-colors shadow-sm ${
-                isWishlisted
-                  ? "bg-red-100 text-red-500 dark:bg-red-950/50"
-                  : "bg-background/90 hover:bg-red-50 hover:text-red-500 dark:bg-background/50 dark:hover:bg-background/90"
-              }`}
+            <button
+              className={`absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full transition-colors shadow-sm ${isWishlisted
+                ? "bg-red-100 text-red-500 dark:bg-red-950/50"
+                : "bg-background/90 hover:bg-red-50 hover:text-red-500 dark:bg-background/50 dark:hover:bg-background/90"
+                }`}
               onClick={(e) => handleToggleWishlist(e, p._id)}
               disabled={isWishlistLoading}
             >
@@ -246,11 +245,11 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
 
   return (
     <main className="mx-auto max-w-7xl px-6 py-10 min-h-screen">
-      
+
       {/* Header & Toggle Button */}
       <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <h1 className="text-4xl font-bold font-serif text-primary">Shop</h1>
-        
+
         <div className="flex items-center gap-3">
           <button
             onClick={() => setIsFilterOpen(!isFilterOpen)}
@@ -305,7 +304,7 @@ export default function ShopClient({ initialProducts }: ShopClientProps) {
         <div className="space-y-16">
           {Object.entries(groupedProducts).map(([categoryName, items]) => (
             <section key={categoryName}>
-              
+
               {/* Category Header */}
               <div className="mb-6 rounded-xl bg-[#f8f9eb]/80 dark:bg-primary/5 px-6 py-4 shadow-sm">
                 <h2 className="text-2xl font-serif text-primary">
