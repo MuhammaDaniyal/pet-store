@@ -1,13 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2, CheckCircle2, XCircle, Stethoscope } from "lucide-react";
+import { Loader2, CheckCircle2, XCircle, Stethoscope, MessageCircle } from "lucide-react";
+import { generateWhatsAppUrl } from "@/lib/whatsapp";
 
 type AppointmentStatus = "pending" | "confirmed" | "completed" | "cancelled";
 
 interface AppointmentRowProps {
   id: string;
   clientName: string;
+  clientPhone?: string;
   petName: string;
   petDescription?: string;
   type: string;
@@ -26,6 +28,7 @@ const STATUS_STYLES: Record<AppointmentStatus, string> = {
 function AppointmentRow({
   id,
   clientName,
+  clientPhone,
   petName,
   petDescription,
   type,
@@ -92,6 +95,17 @@ function AppointmentRow({
 
       {/* Action buttons */}
       <div className="flex shrink-0 flex-wrap gap-2">
+        {clientPhone && (
+          <a
+            href={generateWhatsAppUrl(clientPhone) ?? "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-green-200 bg-green-50 px-3 py-2 text-xs font-semibold text-green-700 transition-colors hover:bg-green-100"
+          >
+            <MessageCircle className="h-3 w-3" />
+            Message
+          </a>
+        )}
         {status === "pending" && (
           <>
             <button

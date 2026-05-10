@@ -6,14 +6,15 @@ export const metadata = {
 
 export default function AdminProfileLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto max-w-6xl px-8 py-12 sm:px-12">
-      <div className="flex flex-col gap-12 lg:flex-row lg:items-start">
-        <aside className="w-full shrink-0 lg:sticky lg:top-32 lg:w-64">
+    <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+      <div className="grid gap-8 lg:grid-cols-[260px_minmax(0,1fr)]">
+        <aside className="w-full shrink-0 lg:sticky lg:top-32 h-fit">
           <AdminProfileSidebar />
         </aside>
-        <div className="min-w-0 flex-1">
+
+        <main className="min-w-0">
           {children}
-        </div>
+        </main>
       </div>
     </div>
   );

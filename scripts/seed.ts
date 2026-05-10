@@ -45,11 +45,14 @@ async function seedDatabase() {
     // ----------------------------------------------------------------------
     let customer: any;
     let vetUser: any;
+    let adminUser: any;
 
-    const userCount = await User.countDocuments();
-    if (userCount === 0) {
-      console.log("🌱 Seeding Users...");
+    console.log("🔍 Checking Users...");
 
+    // --- CHECK & SEED CUSTOMER ---
+    customer = await User.findOne({ email: "i230523@isb.nu.edu.pk" });
+    if (!customer) {
+      console.log("🌱 Seeding Customer User...");
       customer = await User.create({
         name: "Mike Jack",
         email: "i230523@isb.nu.edu.pk",
@@ -58,22 +61,40 @@ async function seedDatabase() {
         phone: "+923154686405",
         address: { street: "32 Khan Colony", city: "Gilgit", province: "Gilgit Baltistan", postalCode: "34873", country: "Pakistan" }
       });
+    } else {
+      console.log("⏭️ Customer user already exists, skipping...");
+    }
 
-      // Added Vet User
+    // --- CHECK & SEED VET ---
+    vetUser = await User.findOne({ email: "vet@petstore.com" });
+    if (!vetUser) {
+      console.log("🌱 Seeding Vet User...");
       vetUser = await User.create({
-        name: "Dr. Sarah",
+        name: "Dr. Daniyal",
         email: "vet@petstore.com",
         password: "$2b$12$XqFwE6RTp.5r60ECh4uyLen95f0xqb..CTurkT4BIkFcQKNPWmo46", // Reused hashed password for convenience
         role: "vet",
-        phone: "+923001234567",
+        phone: "+923165605744",
         address: { street: "10 Clinic Ave", city: "Gilgit", province: "Gilgit Baltistan", postalCode: "34873", country: "Pakistan" }
       });
-
     } else {
-      console.log("⏭️ Users collection is not empty, skipping...");
-      // Fetch existing users to use their ObjectIds for downstream models
-      customer = await User.findOne({ email: "i230523@isb.nu.edu.pk" });
-      vetUser = await User.findOne({ role: "vet" });
+      console.log("⏭️ Vet user already exists, skipping...");
+    }
+
+    // --- CHECK & SEED ADMIN ---
+    adminUser = await User.findOne({ email: "admin@petstore.com" });
+    if (!adminUser) {
+      console.log("🌱 Seeding Admin User...");
+      adminUser = await User.create({
+        name: "Admin User",
+        email: "admin@petstore.com",
+        password: "$2b$12$XqFwE6RTp.5r60ECh4uyLen95f0xqb..CTurkT4BIkFcQKNPWmo46", // Reused hashed password for convenience
+        role: "admin",
+        phone: "+923000000000",
+        address: { street: "1 Admin Way", city: "Islamabad", province: "Federal Capital", postalCode: "44000", country: "Pakistan" }
+      });
+    } else {
+      console.log("⏭️ Admin user already exists, skipping...");
     }
 
     // ----------------------------------------------------------------------

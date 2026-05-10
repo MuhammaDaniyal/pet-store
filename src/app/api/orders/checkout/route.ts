@@ -20,8 +20,6 @@ type CheckoutBody = {
 };
 
 export async function POST(request: Request) {
-  const session = await mongoose.startSession();
-
   try {
     const user = await getCurrentUser();
 
@@ -56,70 +54,57 @@ export async function POST(request: Request) {
 
     await connectToDatabase();
 
-    let orderId = "";
-    let total = 0;
-
-    await session.withTransaction(async () => {
-      const cart = await Cart.findOne({ user: user.userId })
-        .populate({
-          path: "items.product",
-          populate: { path: "category", select: "name slug" },
-        })
-        .session(session);
-
-      if (!cart || cart.items.length === 0) {
-        throw new Error("Your cart is empty.");
-      }
-
-      const items = cart.items.map((item) => {
-        const product = item.product as unknown as {
-          _id: mongoose.Types.ObjectId;
-          name: string;
-          price: number;
-          images?: string[];
-        };
-
-        return {
-          product: product._id,
-          name: product.name,
-          price: product.price,
-          quantity: item.quantity,
-          image: product.images?.[0] ?? "",
-        };
+    const cart = await Cart.findOne({ user: user.userId })
+      .populate({
+        path: "items.product",
+        populate: { path: "category", select: "name slug" },
       });
 
-      total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    if (!cart || cart.items.length === 0) {
+      return NextResponse.json({ message: "Your cart is empty." }, { status: 400 });
+    }
 
-      const order = await Order.create(
-        [
-          {
-            user: user.userId,
-            items,
-            total,
-            status: "pending",
-            address: {
-              fullName: address.fullName?.trim(),
-              phone: address.phone?.trim(),
-              street: address.street?.trim(),
-              city: address.city?.trim(),
-              province: address.province?.trim(),
-              postalCode: address.postalCode?.trim(),
-            },
-            paymentMethod: "cash_on_delivery",
-          },
-        ],
-        { session },
-      );
+    const items = cart.items.map((item : { product: unknown; quantity: number }) => {
+      const product = item.product as unknown as {
+        _id: mongoose.Types.ObjectId;
+        name: string;
+        price: number;
+        images?: string[];
+      };
 
-      await Cart.updateOne({ user: user.userId }, { $set: { items: [] } }, { session });
-
-      orderId = order[0]._id.toString();
+      return {
+        product: product._id,
+        name: product.name,
+        price: product.price,
+        quantity: item.quantity,
+        image: product.images?.[0] ?? "",
+      };
     });
+
+    const total = items.reduce((sum : number, item : { price: number; quantity: number }) => sum + item.price * item.quantity, 0);
+
+    const order = await Order.create({
+      user: user.userId,
+      items,
+      total,
+      status: "confirmed",
+      address: {
+        fullName: address.fullName?.trim(),
+        phone: address.phone?.trim(),
+        street: address.street?.trim(),
+        city: address.city?.trim(),
+        province: address.province?.trim(),
+        postalCode: address.postalCode?.trim(),
+      },
+      paymentMethod: "cash_on_delivery",
+    });
+
+    await Cart.updateOne({ user: user.userId }, { $set: { items: [] } });
 
     return NextResponse.json(
       {
         message: "Order placed successfully.",
-        orderId,
+        orderId: order._id.toString(),
         total,
       },
       { status: 201 },
@@ -128,7 +113,5 @@ export async function POST(request: Request) {
     const message = error instanceof Error ? error.message : "Unable to complete checkout.";
     const status = message === "Your cart is empty." ? 400 : 500;
     return NextResponse.json({ message }, { status });
-  } finally {
-    session.endSession();
   }
 }

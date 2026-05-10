@@ -79,17 +79,18 @@ export async function POST(request: Request) {
   if (!email) fieldErrors.email = "Email is required.";
   if (!password) {
     fieldErrors.password = "Password is required.";
-  } else if (password.length < 6) {
-    fieldErrors.password = "Password must be at least 6 characters long.";
-  } else if (!/[A-Z]/.test(password)) {
-    fieldErrors.password = "Password must contain at least one uppercase letter.";
-  } else if (!/[a-z]/.test(password)) {
-    fieldErrors.password = "Password must contain at least one lowercase letter.";
-  } else if (!/[0-9]/.test(password)) {
-    fieldErrors.password = "Password must contain at least one number.";
-  } else if (!/[^a-zA-Z0-9]/.test(password)) {
-    fieldErrors.password = "Password must contain at least one special character.";
   }
+  //  else if (password.length < 6) {
+  //   fieldErrors.password = "Password must be at least 6 characters long.";
+  // } else if (!/[A-Z]/.test(password)) {
+  //   fieldErrors.password = "Password must contain at least one uppercase letter.";
+  // } else if (!/[a-z]/.test(password)) {
+  //   fieldErrors.password = "Password must contain at least one lowercase letter.";
+  // } else if (!/[0-9]/.test(password)) {
+  //   fieldErrors.password = "Password must contain at least one number.";
+  // } else if (!/[^a-zA-Z0-9]/.test(password)) {
+  //   fieldErrors.password = "Password must contain at least one special character.";
+  // }
   if (!confirmPassword) fieldErrors.confirmPassword = "Please confirm your password.";
   if (password && confirmPassword && password !== confirmPassword) {
     fieldErrors.confirmPassword = "Passwords do not match.";

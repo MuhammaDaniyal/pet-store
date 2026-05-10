@@ -47,6 +47,10 @@ export default async function AdminProfilePage() {
               Admin Dashboard
               <ArrowRight className="h-4 w-4 text-accent" />
             </Link>
+            <Link href="/admin/profile/edit" className="flex items-center justify-between rounded-2xl border border-border bg-surface px-4 py-3 text-sm font-medium text-primary transition-colors hover:border-accent/30 hover:bg-accent/10">
+              Edit profile
+              <ArrowRight className="h-4 w-4 text-accent" />
+            </Link>
           </div>
         </div>
       </section>

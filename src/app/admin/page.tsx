@@ -20,11 +20,13 @@ export default async function AdminDashboardPage() {
   ];
 
   return (
-    <div className="p-8 sm:p-12">
-      <h1 className="text-3xl font-semibold tracking-tight text-primary">Admin Dashboard</h1>
-      <p className="mt-2 text-secondary">High-level overview of the platform.</p>
+    <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+      <div className="mb-8">
+        <h1 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold tracking-[-0.04em] text-primary">Admin Dashboard</h1>
+        <p className="mt-3 text-base text-secondary">High-level overview of the platform.</p>
+      </div>
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-3">
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (

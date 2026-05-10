@@ -25,16 +25,16 @@ export function VetRow({ vet }: { vet: any }) {
 
   return (
     <tr className="border-b border-border/50 hover:bg-surface/50 transition-colors">
-      <td className="px-6 py-4 text-sm font-medium text-primary">{vet.user?.name ?? "Unknown"}</td>
-      <td className="px-6 py-4 text-sm text-secondary">{vet.user?.email ?? "Unknown"}</td>
-      <td className="px-6 py-4 text-sm text-secondary">{vet.specialization || "-"}</td>
-      <td className="px-6 py-4 text-sm text-secondary">${vet.consultationFee || 0}</td>
-      <td className="px-6 py-4">
+      <td className="px-5 py-4 text-sm font-medium text-primary">{vet.user?.name ?? "Unknown"}</td>
+      <td className="px-5 py-4 text-sm text-secondary">{vet.user?.email ?? "Unknown"}</td>
+      <td className="px-5 py-4 text-sm text-secondary">{vet.specialization || "-"}</td>
+      <td className="px-5 py-4 text-sm text-secondary">${vet.consultationFee || 0}</td>
+      <td className="px-5 py-4">
         <span className={`inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-xs font-semibold ${isVerified ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-amber-50 text-amber-700 border border-amber-200"}`}>
           {isVerified ? "Verified" : "Pending"}
         </span>
       </td>
-      <td className="px-6 py-4">
+      <td className="px-5 py-4">
         <button
           onClick={toggleVerify}
           disabled={isPending}

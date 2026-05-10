@@ -7,7 +7,7 @@ import AppointmentRow from "./AppointmentRow";
 
 interface AppointmentDoc {
   _id: { toString(): string };
-  user: { _id: { toString(): string }; name?: string; email?: string } | null;
+  user: { _id: { toString(): string }; name?: string; email?: string; phone?: string } | null;
   petName: string;
   petDescription?: string;
   date: Date | string;
@@ -27,7 +27,7 @@ export default async function VetAppointmentsPage() {
   await connectToDatabase();
 
   const raw = await Appointment.find({ vet: user.userId })
-    .populate("user", "name email")
+    .populate("user", "name email phone")
     .sort({ date: -1 })
     .lean();
 
@@ -69,6 +69,7 @@ export default async function VetAppointmentsPage() {
                 key={appt._id.toString()}
                 id={appt._id.toString()}
                 clientName={appt.user?.name ?? appt.user?.email ?? "Unknown client"}
+                clientPhone={appt.user?.phone}
                 petName={appt.petName}
                 petDescription={appt.petDescription}
                 type={appt.type}

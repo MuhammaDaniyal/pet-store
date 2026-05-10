@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Clock, Stethoscope, Star } from "lucide-react";
+import { ArrowLeft, Clock, Stethoscope, Star, MessageCircle } from "lucide-react";
 import { connectToDatabase } from "@/lib/db";
 import { User } from "@/lib/models/User";
 import { Vet } from "@/lib/models/Vet";
+import { generateWhatsAppUrl } from "@/lib/whatsapp";
 import BookingForm from "./BookingForm";
 
 export const metadata = {
@@ -24,6 +25,7 @@ export default async function VetBookingPage({ params }: PageProps) {
     _id: { toString(): string };
     name: string;
     email: string;
+    phone?: string;
   }>();
 
   if (!vetUser) notFound();
@@ -132,6 +134,21 @@ export default async function VetBookingPage({ params }: PageProps) {
                     </span>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {/* Contact on WhatsApp */}
+            {vetUser.phone && (
+              <div className="mt-6">
+                <a
+                  href={generateWhatsAppUrl(vetUser.phone) ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-green-100 px-4 py-3 text-sm font-semibold text-green-700 transition-colors hover:bg-green-200"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Chat on WhatsApp
+                </a>
               </div>
             )}
           </div>
