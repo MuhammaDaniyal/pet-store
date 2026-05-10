@@ -35,19 +35,19 @@ export type CreateSignupVerificationInput = {
 
 export type VerificationCheckResult =
   | {
-      status: "verified";
-      signup: CreateSignupVerificationInput;
-    }
+    status: "verified";
+    signup: CreateSignupVerificationInput;
+  }
   | {
-      status: "missing";
-    }
+    status: "missing";
+  }
   | {
-      status: "expired";
-    }
+    status: "expired";
+  }
   | {
-      status: "invalid";
-      attemptsLeft: number;
-    };
+    status: "invalid";
+    attemptsLeft: number;
+  };
 
 function normalizeEmail(email: string) {
   return email.trim().toLowerCase();
@@ -134,14 +134,14 @@ export async function verifySignupVerificationCode(
     email: pending.email,
     password: pending.password,
     phone: pending.phone,
-    address: pending.address,
+    address: pending.address as CreateSignupVerificationInput["address"],
     role: pending.role,
-    specialization: pending.specialization,
-    experience: pending.experience,
-    consultationFee: pending.consultationFee,
-    bio: pending.bio,
-    availableDays: pending.availableDays,
-    timeSlots: pending.timeSlots,
+    specialization: pending.specialization ?? undefined,
+    experience: pending.experience ?? undefined,
+    consultationFee: pending.consultationFee ?? undefined,
+    bio: pending.bio ?? undefined,
+    availableDays: pending.availableDays ?? undefined,
+    timeSlots: pending.timeSlots ?? undefined,
   } satisfies CreateSignupVerificationInput;
 
   await pending.deleteOne();
