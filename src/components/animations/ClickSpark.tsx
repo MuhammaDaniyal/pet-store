@@ -6,6 +6,7 @@ interface ClickSparkProps {
   sparkColor?: string;
   sparkSize?: number;
   sparkRadius?: number;
+  spawnRadius?: number;
   sparkCount?: number;
   duration?: number;
   easing?: 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out';
@@ -24,8 +25,9 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
   sparkColor = '#fff',
   sparkSize = 10,
   sparkRadius = 15,
+  spawnRadius = 14,
   sparkCount = 8,
-  duration = 400,
+  duration = 300, // Slightly faster for a "snappier" feel
   easing = 'ease-out',
   extraScale = 1.0,
   children
@@ -95,7 +97,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
       if (!startTimeRef.current) {
         startTimeRef.current = timestamp;
       }
-      ctx?.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       sparksRef.current = sparksRef.current.filter((spark: Spark) => {
         const elapsed = timestamp - spark.startTime;
@@ -106,16 +108,19 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
         const progress = elapsed / duration;
         const eased = easeFunc(progress);
 
-        const distance = eased * sparkRadius * extraScale;
+        // travelDistance relative to the spawn radius
+        const travelDistance = eased * sparkRadius * extraScale;
         const lineLength = sparkSize * (1 - eased);
 
-        const x1 = spark.x + distance * Math.cos(spark.angle);
-        const y1 = spark.y + distance * Math.sin(spark.angle);
-        const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle);
-        const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle);
+        // Start at the edge of the spawnRadius and move outward
+        const x1 = spark.x + (spawnRadius + travelDistance) * Math.cos(spark.angle);
+        const y1 = spark.y + (spawnRadius + travelDistance) * Math.sin(spark.angle);
+        const x2 = spark.x + (spawnRadius + travelDistance + lineLength) * Math.cos(spark.angle);
+        const y2 = spark.y + (spawnRadius + travelDistance + lineLength) * Math.sin(spark.angle);
 
         ctx.strokeStyle = sparkColor;
         ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
@@ -132,7 +137,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     return () => {
       cancelAnimationFrame(animationId);
     };
-  }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
+  }, [sparkColor, sparkSize, sparkRadius, spawnRadius, sparkCount, duration, easeFunc, extraScale]);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>): void => {
     const canvas = canvasRef.current;

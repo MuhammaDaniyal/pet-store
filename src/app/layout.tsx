@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { ThemeProviderWrapper } from "@/components/ThemeProvider";
 import ClickSpark from "@/components/animations/ClickSpark";
+import CustomCursor from "@/components/animations/CustomCursor";
 import ChatbotSidebarWrapper from "@/components/chatbot/ChatbotSidebarWrapper";
 import { TopBar } from "@/components/TopBar";
 import "./globals.css";
@@ -37,6 +38,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background text-primary">
         <ThemeProviderWrapper>
+          <CustomCursor />
           <ClickSpark
             sparkColor="#FF6B35"
             sparkSize={10}

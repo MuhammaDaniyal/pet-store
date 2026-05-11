@@ -182,3 +182,22 @@ input:-webkit-autofill:focus {
     position: relative;
   }
 }
+
+/* =========================================
+      CUSTOM CURSOR (desktop / fine pointer)
+   ========================================= */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  /* Prevent the default hand cursor from showing on interactive elements */
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    cursor: none !important;
+  }
+}
