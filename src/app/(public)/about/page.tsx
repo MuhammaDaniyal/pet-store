@@ -32,7 +32,7 @@ export default function AboutPage() {
             <em className="font-normal not-italic text-[#6A6860]">deeply.</em>
           </h1>
           <p className="max-w-sm text-[14px] leading-[1.85] text-secondary lg:text-right">
-            PetStore started from a simple frustration - finding quality
+            MD PawVita started from a simple frustration - finding quality
             pet products online was a mess. So we fixed it.
           </p>
         </div>
@@ -79,7 +79,7 @@ export default function AboutPage() {
           {/* Right - text body */}
           <div className="space-y-6 text-[15px] leading-[1.85] text-secondary">
             <p>
-              PetStore was founded by a group of pet owners who got tired of
+              MD PawVita was founded by a group of pet owners who got tired of
               inconsistent quality, slow delivery, and stores that treated animals
               like an afterthought. We wanted something better - a single place
               with products we'd actually trust for our own companions.
@@ -121,7 +121,7 @@ export default function AboutPage() {
               Ready to find the perfect products?
             </p>
             <p className="mt-1 text-[13px] text-[#0A1618]">
-              Join thousands of pet owners who trust PetStore.
+              Join thousands of pet owners who trust MD PawVita.
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-6 sm:justify-start">

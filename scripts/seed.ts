@@ -66,12 +66,12 @@ async function seedDatabase() {
     }
 
     // --- CHECK & SEED VET ---
-    vetUser = await User.findOne({ email: "vet@petstore.com" });
+    vetUser = await User.findOne({ email: "vet@mdpawvita.com" });
     if (!vetUser) {
       console.log("🌱 Seeding Vet User...");
       vetUser = await User.create({
         name: "Dr. Daniyal",
-        email: "vet@petstore.com",
+        email: "vet@mdpawvita.com",
         password: "$2b$12$XqFwE6RTp.5r60ECh4uyLen95f0xqb..CTurkT4BIkFcQKNPWmo46", // Reused hashed password for convenience
         role: "vet",
         phone: "+923165605744",
@@ -82,12 +82,12 @@ async function seedDatabase() {
     }
 
     // --- CHECK & SEED ADMIN ---
-    adminUser = await User.findOne({ email: "admin@petstore.com" });
+    adminUser = await User.findOne({ email: "admin@mdpawvita.com" });
     if (!adminUser) {
       console.log("🌱 Seeding Admin User...");
       adminUser = await User.create({
         name: "Admin User",
-        email: "admin@petstore.com",
+        email: "admin@mdpawvita.com",
         password: "$2b$12$XqFwE6RTp.5r60ECh4uyLen95f0xqb..CTurkT4BIkFcQKNPWmo46", // Reused hashed password for convenience
         role: "admin",
         phone: "+923000000000",

@@ -21,8 +21,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PetStore",
-  description: "PetStore authentication and storefront",
+  title: "MD PawVita",
+  description: "MD PawVita authentication and storefront",
 };
 
 export default function RootLayout({

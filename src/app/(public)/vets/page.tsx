@@ -19,7 +19,7 @@ interface VetProfile {
 }
 
 export const metadata = {
-  title: "Find a Vet | PetStore",
+  title: "Find a Vet | MD PawVita",
   description: "Browse our network of verified, experienced veterinarians and book an appointment today.",
 };
 

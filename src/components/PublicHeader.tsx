@@ -20,7 +20,7 @@ export async function PublicHeader() {
 
       <div className="mx-auto flex max-w-6xl items-center justify-between px-8 py-5 sm:px-12">
         <Link href="/" className="text-[11px] font-bold tracking-[0.28em] text-primary">
-          PETSTORE
+          MD PAWVITA
         </Link>
 
         <ClientNav user={user} />

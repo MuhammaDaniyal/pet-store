@@ -188,7 +188,7 @@ export default function SignUpPage() {
     <section className="w-full max-w-3xl rounded-lg border border-border bg-surface p-10">
       <div className="space-y-2">
         <h1 className="text-2xl font-medium text-primary">Create an account</h1>
-        <p className="text-sm text-secondary">Join PetStore and find your perfect companion</p>
+        <p className="text-sm text-secondary">Join MD PawVita and find your perfect companion</p>
       </div>
 
       <form className="mt-8 grid gap-5 sm:grid-cols-2" onSubmit={handleSubmit} noValidate>

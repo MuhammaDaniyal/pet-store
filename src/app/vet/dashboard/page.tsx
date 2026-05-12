@@ -17,7 +17,7 @@ interface AppointmentDoc {
 }
 
 export const metadata = {
-  title: "Vet Dashboard | PetStore",
+  title: "Vet Dashboard | MD PawVita",
   description: "Manage your appointments and schedule.",
 };
 

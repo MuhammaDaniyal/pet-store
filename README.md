@@ -1,4 +1,4 @@
-# 🐾 Pet Store E-Commerce & Clinic Platform
+# 🐾 MD PawVita E-Commerce & Clinic Platform
 
 A full-stack, multi-role e-commerce and veterinary clinic platform built with Next.js 15. This application allows users to adopt/shop for pets and pet supplies, book appointments with verified veterinarians, and provides dedicated dashboards for Users, Vets, and Admins.
 

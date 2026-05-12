@@ -63,11 +63,11 @@ export async function sendVerificationEmail(
     throw new Error("SMTP configuration is missing. Set SMTP_URL or SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS.");
   }
 
-  const subject = "Verify your PetStore account";
+  const subject = "Verify your MD PawVita account";
   const text = [
     `Hi ${input.name},`,
     "",
-    `Your PetStore verification code is: ${input.code}`,
+    `Your MD PawVita verification code is: ${input.code}`,
     "",
     `This code expires in 15 minutes.`,
     "",
@@ -82,7 +82,7 @@ export async function sendVerificationEmail(
     html: `
       <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0A0A0A">
         <p>Hi ${input.name},</p>
-        <p>Your PetStore verification code is:</p>
+        <p>Your MD PawVita verification code is:</p>
         <p style="font-size:28px;font-weight:700;letter-spacing:0.3em">${input.code}</p>
         <p>This code expires in 15 minutes.</p>
         <p>If you did not request this code, you can ignore this message.</p>
@@ -112,7 +112,7 @@ export async function sendVetWelcomeEmail(
   const text = [
     `Hi ${name},`,
     "",
-    `Your Veterinarian account at PetStore has been verified by our admins!`,
+    `Your Veterinarian account at MD PawVita has been verified by our admins!`,
     "",
     `You can now log in to manage your dashboard and appointments.`,
     "",
@@ -127,7 +127,7 @@ export async function sendVetWelcomeEmail(
     html: `
       <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0A0A0A">
         <p>Hi ${name},</p>
-        <p>Your Veterinarian account at PetStore has been verified by our admins!</p>
+        <p>Your Veterinarian account at MD PawVita has been verified by our admins!</p>
         <p>You can now log in to manage your dashboard and appointments.</p>
         <p>Welcome to the platform!</p>
       </div>

@@ -37,7 +37,7 @@ const TYPE_LABEL: Record<AppointmentDoc["type"], string> = {
 };
 
 export const metadata = {
-  title: "My Appointments | PetStore",
+  title: "My Appointments | MD PawVita",
   description: "View and manage your vet appointments.",
 };
 

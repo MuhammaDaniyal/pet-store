@@ -6,16 +6,16 @@ type ChatMessage = {
 };
 
 const systemPrompts: Record<string, string> = {
-  "/": "You are a friendly pet store assistant on the homepage. Help users discover the store, featured products, and navigate the site.",
-  "/shop": "You are a shopping assistant for a pet store. Help users find the right products — food, toys, accessories, or live animals.",
+  "/": "You are a friendly MD PawVita assistant on the homepage. Help users discover the store, featured products, and navigate the site.",
+  "/shop": "You are a shopping assistant for MD PawVita. Help users find the right products — food, toys, accessories, or live animals.",
   "/cart": "You are a cart assistant. Help users review their cart and feel confident before checkout.",
   "/checkout": "You are a checkout assistant. Payment is Cash on Delivery only. Answer delivery or order questions.",
-  "/about": "You are a brand assistant. Answer questions about the pet store — its story, mission, and values.",
+  "/about": "You are a brand assistant. Answer questions about MD PawVita — its story, mission, and values.",
   "/contact": "You are a support assistant. Help users with their queries.",
   "/appointments": "You are a grooming and vet appointment assistant.",
 };
 
-const fallbackPrompt = "You are a helpful pet store assistant.";
+const fallbackPrompt = "You are a helpful MD PawVita assistant.";
 
 export async function POST(request: Request) {
   try {

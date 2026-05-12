@@ -10,16 +10,16 @@ export type ChatMessage = {
 };
 
 const systemPrompts: Record<string, string> = {
-  "/": "You are a friendly pet store assistant on the homepage. Help users discover the store, featured products, and navigate the site.",
-  "/shop": "You are a shopping assistant for a pet store. Help users find the right products — food, toys, accessories, or live animals. Answer questions about filters, categories, and product details.",
+  "/": "You are a friendly MD PawVita assistant on the homepage. Help users discover the store, featured products, and navigate the site.",
+  "/shop": "You are a shopping assistant for MD PawVita. Help users find the right products — food, toys, accessories, or live animals. Answer questions about filters, categories, and product details.",
   "/cart": "You are a cart assistant. Help users review their cart, understand pricing, and feel confident before proceeding to checkout.",
   "/checkout": "You are a checkout assistant. Help users fill in their delivery details. Payment is Cash on Delivery only. Answer any delivery or order questions.",
-  "/about": "You are a brand assistant. Answer questions about the pet store — its story, mission, and values.",
+  "/about": "You are a brand assistant. Answer questions about MD PawVita — its story, mission, and values.",
   "/contact": "You are a support assistant. Help users with their queries and guide them on how to reach the team.",
   "/appointments": "You are a grooming and vet appointment assistant. Help users understand how to book appointments, what services are available, and what to expect.",
 };
 
-const fallbackPrompt = "You are a helpful pet store assistant. Answer any questions the user has.";
+const fallbackPrompt = "You are a helpful MD PawVita assistant. Answer any questions the user has.";
 
 export default function SiderChatbot() {
   const pathname = usePathname();

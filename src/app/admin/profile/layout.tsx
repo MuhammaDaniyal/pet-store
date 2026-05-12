@@ -1,7 +1,7 @@
 import { AdminProfileSidebar } from "@/components/admin/AdminProfileSidebar";
 
 export const metadata = {
-  title: "Admin Profile | Petstore",
+  title: "Admin Profile | MD PawVita",
 };
 
 export default function AdminProfileLayout({ children }: { children: React.ReactNode }) {

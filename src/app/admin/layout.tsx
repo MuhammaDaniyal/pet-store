@@ -3,7 +3,7 @@ import { getCurrentUser } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Admin Dashboard | Petstore",
+  title: "Admin Dashboard | MD PawVita",
 };
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {

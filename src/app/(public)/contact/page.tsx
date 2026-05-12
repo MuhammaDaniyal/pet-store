@@ -72,12 +72,12 @@ export default function ContactPage() {
             {[
               {
                 label: "Email",
-                value: "hello@petstore.com",
+                value: "hello@mdpawvita.com",
                 sub: "We reply within 24 hours",
               },
               {
                 label: "Support",
-                value: "support@petstore.com",
+                value: "support@mdpawvita.com",
                 sub: "Order issues, returns, tracking",
               },
               {

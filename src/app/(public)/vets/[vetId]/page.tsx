@@ -8,7 +8,7 @@ import { generateWhatsAppUrl } from "@/lib/whatsapp";
 import BookingForm from "./BookingForm";
 
 export const metadata = {
-  title: "Book Appointment | PetStore",
+  title: "Book Appointment | MD PawVita",
   description: "Book an appointment with one of our verified veterinarians.",
 };
 

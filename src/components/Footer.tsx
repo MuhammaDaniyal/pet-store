@@ -22,7 +22,7 @@ export function Footer() {
           {/* Branding */}
           <div>
             <h3 className="text-[11px] font-bold tracking-[0.28em] text-primary">
-              PETSTORE
+              MD PAWVITA
             </h3>
             <p className="mt-3 text-[12px] leading-relaxed text-muted">
               Your trusted partner in pet care and supplies.
@@ -55,10 +55,10 @@ export function Footer() {
               <p className="flex items-center gap-2">
                 <span className="font-medium text-primary"><Mail size={16} /></span>
                 <a
-                  href="mailto:support@petstore.com"
+                  href="mailto:support@mdpawvita.com"
                   className="transition-colors hover:text-primary"
                 >
-                  support@petstore.com
+                  support@mdpawvita.com
                 </a>
               </p>
               <p className="flex items-center gap-2">
@@ -91,7 +91,7 @@ export function Footer() {
 
         {/* Bottom Section - Copyright */}
         <div className="border-t border-border/50 pt-6 text-center text-[11px] tracking-[0.2em] text-muted">
-          <p>PETSTORE © {new Date().getFullYear()} ALL RIGHTS RESERVED</p>
+          <p>MD PAWVITA © {new Date().getFullYear()} ALL RIGHTS RESERVED</p>
         </div>
       </div>
     </footer>

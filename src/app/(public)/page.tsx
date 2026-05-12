@@ -44,32 +44,32 @@ export default function HomePage() {
               aria-hidden
               className="pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 text-[24vw] font-black leading-none text-black opacity-[0.04]"
             >
-              PS
+              MD
             </div>
 
             <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-[#6B7280] sm:mb-6">
               Premium pet care — since 2024
             </p>
 
-            <BlurText 
-              text="Every companion" 
-              delay={220} 
-              animateBy="words" 
+            <BlurText
+              text="Every companion"
+              delay={220}
+              animateBy="words"
               direction="top"
               className="mx-auto max-w-3xl items-center justify-center text-[clamp(3rem,7vw,5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-[#1A535C]"
             />
             <div className="flex flex-wrap items-center justify-center">
-              <BlurText 
-                text="deserves" 
-                delay={420} 
-                animateBy="words" 
+              <BlurText
+                text="deserves"
+                delay={420}
+                animateBy="words"
                 direction="top"
                 className="text-[clamp(3rem,7vw,5rem)] font-normal leading-[0.95] tracking-[-0.04em] text-[#6A6860]"
               />
-              <BlurText 
-                text=" the best." 
-                delay={420} 
-                animateBy="words" 
+              <BlurText
+                text=" the best."
+                delay={420}
+                animateBy="words"
                 direction="top"
                 className="text-[clamp(3rem,7vw,5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-[#1A535C]"
               />
@@ -87,7 +87,7 @@ export default function HomePage() {
                 <Link
                   href="/sign-up"
                   className="mx-2 rounded-full bg-accent px-7 py-3 text-[13px] font-medium text-[#F5F4F0] transition-all duration-200 hover:scale-[1.1] hover:shadow-[0_0_15px_#FF6B35]"
-                  >
+                >
                   Create account
                 </Link>
               </Magnet>
@@ -136,7 +136,7 @@ export default function HomePage() {
                 animateOpacity
                 scale={0.95}
                 threshold={0.1}
-                delay={0.15 + index * 0.15} 
+                delay={0.15 + index * 0.15}
               >
                 <div className="rounded-2xl border border-border bg-surface p-7 sm:p-8 h-full">
                   <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted">
