@@ -124,19 +124,19 @@ export default function AboutPage() {
               Join thousands of pet owners who trust PetStore.
             </p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap justify-center gap-6 sm:justify-start">
             <Magnet padding={50} disabled={false} magnetStrength={10}>
               <Link
                 href="/shop"
-                className="rounded-full border border-[#F5F4F0] mx-3 px-6 py-3 text-[13px] text-[#F5F4F0] font-medium transition-all duration-300 hover:bg-[#F5F4F0] hover:text-[#0A1618] hover:scale-[1.1]"
-                >
+                className="rounded-full border border-[#F5F4F0] px-6 py-3 text-[13px] text-[#F5F4F0] font-medium transition-all duration-300 hover:bg-[#F5F4F0] hover:text-[#0A1618] hover:scale-[1.1]"
+              >
                 Browse shop
               </Link>
             </Magnet>
             <Magnet padding={50} disabled={false} magnetStrength={10}>
               <Link
                 href="/sign-up"
-                className="rounded-full bg-background mx-1 px-6 py-3 text-[13px] font-medium text-primary transition-all duration-200 hover:bg-surface hover:shadow-[0_0_15px_var(--accent)] hover:scale-[1.1]"
+                className="rounded-full bg-background px-6 py-3 text-[13px] font-medium text-primary transition-all duration-200 hover:bg-surface hover:shadow-[0_0_15px_var(--accent)] hover:scale-[1.1]"
               >
                 Create account
               </Link>

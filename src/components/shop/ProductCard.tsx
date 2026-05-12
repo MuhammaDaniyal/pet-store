@@ -143,7 +143,7 @@ export function ProductCard({ product, initialWishlisted, isLoggedIn }: ProductC
       ) : null}
 
       <Link href={`/shop/${product.id}`} className="block">
-        <div className="relative aspect-4/3 overflow-hidden bg-background">
+        <div className="relative aspect-square sm:aspect-video md:aspect-4/3 overflow-hidden bg-background">
           {image ? (
             <img
               src={image}
@@ -161,32 +161,32 @@ export function ProductCard({ product, initialWishlisted, isLoggedIn }: ProductC
           ) : null}
         </div>
 
-        <div className="space-y-2 p-5">
+        <div className="space-y-1.5 p-3 md:p-5">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted">
+              <p className="text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.3em] text-muted">
                 {product.category?.name ?? product.animalType}
               </p>
-              <h3 className="mt-2 text-lg font-semibold leading-snug text-primary">{product.name}</h3>
+              <h3 className="mt-1 md:mt-2 text-sm md:text-lg font-semibold leading-snug text-primary">{product.name}</h3>
             </div>
 
-            <p className="shrink-0 text-lg font-semibold text-primary">{formatMoney(product.price)}</p>
+            <p className="shrink-0 text-sm md:text-base font-semibold text-primary">{formatMoney(product.price)}</p>
           </div>
 
-          <p className="text-sm leading-relaxed text-secondary capitalize">
+          <p className="text-[10px] md:text-sm leading-relaxed text-secondary capitalize">
             {product.animalType.replaceAll("-", " ")}
           </p>
         </div>
       </Link>
 
-      <div className="flex gap-3 border-t border-border p-4">
+      <div className="flex gap-2 md:gap-3 border-t border-border p-2.5 md:p-4">
         <button
           type="button"
           onClick={handleAddToCart}
           disabled={isCartLoading}
-          className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
+          className="inline-flex flex-1 items-center justify-center gap-1.5 md:gap-2 rounded-full bg-accent px-3 md:px-4 py-1.5 md:py-2.5 text-xs md:text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
         >
-          {isCartLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShoppingCart className="h-4 w-4" />}
+          {isCartLoading ? <Loader2 className="h-3.5 w-3.5 md:h-4 md:w-4 animate-spin" /> : <ShoppingCart className="h-3.5 w-3.5 md:h-4 md:w-4" />}
           {isCartLoading ? "Adding..." : "Add to Cart"}
         </button>
 
@@ -195,16 +195,16 @@ export function ProductCard({ product, initialWishlisted, isLoggedIn }: ProductC
           onClick={handleToggleWishlist}
           disabled={isWishlistLoading}
           aria-pressed={wishlisted}
-          className={`inline-flex items-center justify-center rounded-full border px-4 py-3 transition-colors disabled:cursor-not-allowed disabled:opacity-70 ${
+          className={`inline-flex items-center justify-center rounded-full border px-3 md:px-4 py-1.5 md:py-2.5 transition-colors disabled:cursor-not-allowed disabled:opacity-70 ${
             wishlisted
               ? "border-[#F6B0B0] bg-[#FFF1F1] text-[#C62828]"
               : "border-border bg-background text-primary hover:border-accent/30 hover:bg-accent/10"
           }`}
         >
           {isWishlistLoading ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
+            <Loader2 className="h-3.5 w-3.5 md:h-4 md:w-4 animate-spin" />
           ) : (
-            <Heart className={`h-4 w-4 ${wishlisted ? "fill-current" : ""}`} />
+            <Heart className={`h-3.5 w-3.5 md:h-4 md:w-4 ${wishlisted ? "fill-current" : ""}`} />
           )}
         </button>
       </div>

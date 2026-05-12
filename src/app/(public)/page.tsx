@@ -178,7 +178,7 @@ export default function HomePage() {
           </div>
 
           {/* Interactive Circular Gallery */}
-          <div className="relative h-[600px] w-full overflow-hidden rounded-2xl">
+          <div className="relative h-[280px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full overflow-hidden rounded-2xl">
             <CircularGallery
               items={[
                 { text: "Cats", image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=80" },
