@@ -4,7 +4,7 @@ import { ThemeProviderWrapper } from "@/components/ThemeProvider";
 import ClickSpark from "@/components/animations/ClickSpark";
 import CustomCursor from "@/components/animations/CustomCursor";
 import ChatbotSidebarWrapper from "@/components/chatbot/ChatbotSidebarWrapper";
-import { TopBar } from "@/components/TopBar";
+import { TopBar } from "@/components/TopBar"; // kept for any non-nav pages
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -46,7 +46,7 @@ export default function RootLayout({
             sparkCount={8}
             duration={400}
           >
-            <TopBar />
+            {/* ThemeToggle is now inside PublicHeader / AdminHeader */}
             {children}
             <ChatbotSidebarWrapper />
           </ClickSpark>
