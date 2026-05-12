@@ -71,7 +71,7 @@ export default function CustomCursor() {
         scaleX: isClicking ? -0.7 : -1,
         scaleY: isClicking ? 0.7 : 1
       }}
-      transition={{ type: "spring", stiffness: 1300, damping: 25 }}
+      transition={{ type: "spring", stiffness: 3300, damping: 30 }}
     >
       <PawPrint
         size={32}
